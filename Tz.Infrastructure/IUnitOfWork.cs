@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Tz.Infrastructure
+﻿namespace Tz.Infrastructure
 {
     /// <summary>
     /// 表示所有集成于该接口的类型都是Unit Of Work的一种实现

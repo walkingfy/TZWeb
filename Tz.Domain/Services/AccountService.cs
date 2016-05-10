@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Tz.Core;
 using Tz.Core.Exceptions;
 using Tz.Domain.Entity;
 using Tz.Domain.Repositories.IRepositories;
-using  Tz.Domain.Repositories;
+using Tz.Domain.Repositories;
 using Tz.Domain.Specifications;
 
 namespace Tz.Domain.Services

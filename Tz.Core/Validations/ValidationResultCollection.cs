@@ -2,7 +2,6 @@
 *Author:zelin
 *CreateDate:2015-10-6 01:30:03
 */
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

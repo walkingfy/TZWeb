@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 
 using Autofac;
 using Autofac.Configuration;
@@ -23,6 +18,7 @@ namespace Tz.Application
             builder.RegisterType<EntityFrameworkRepositoryContext>().As<IRepositoryContext>().InstancePerMatchingLifetimeScope();
             builder.RegisterModule(new ConfigurationSettingsReader("autofac"));
             builder.RegisterType<AccountService>();
+            builder.RegisterType<AccountRolesService>();
 
         }
     }
