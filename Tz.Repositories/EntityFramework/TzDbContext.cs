@@ -31,6 +31,11 @@ namespace Tz.Repositories.EntityFramework
             get { return Set<Role>(); }
         }
 
+        public DbSet<Module> Modules
+        {
+            get { return Set<Module>(); }
+        }
+
 
         #endregion
     }
