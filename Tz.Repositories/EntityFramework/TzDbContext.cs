@@ -1,6 +1,7 @@
 ﻿using System.Data.Entity;
 
 using Tz.Domain.Entity;
+using Tz.Repositories.EntityFramework.ModelConfigurations;
 
 namespace Tz.Repositories.EntityFramework
 {
@@ -52,8 +53,15 @@ namespace Tz.Repositories.EntityFramework
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            
-                
+            modelBuilder
+                .Configurations
+                .Add(new AccountTypeConfiguration())
+                .Add(new RoleTypeConfiguration())
+                .Add(new ModuleTypeConfiguration())
+                .Add(new AccountRoleTypeConfiguration())
+                .Add(new RolePermissionTypeConfiguration());
+            base.OnModelCreating(modelBuilder);
+
         }
         #endregion
     }
