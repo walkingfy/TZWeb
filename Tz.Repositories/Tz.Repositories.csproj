@@ -53,6 +53,11 @@
     <Compile Include="EntityFramework\EntityFrameworkRepositoryContext.cs" />
     <Compile Include="EntityFramework\EnumTableName.cs" />
     <Compile Include="EntityFramework\IEntityFrameworkRepositoryContext.cs" />
+    <Compile Include="EntityFramework\ModelConfigurations\AccountRoleTypeConfiguration.cs" />
+    <Compile Include="EntityFramework\ModelConfigurations\AccountTypeConfiguration.cs" />
+    <Compile Include="EntityFramework\ModelConfigurations\ModuleTypeConfiguration.cs" />
+    <Compile Include="EntityFramework\ModelConfigurations\RoleModuleTypeConfiguration.cs" />
+    <Compile Include="EntityFramework\ModelConfigurations\RoleTypeConfiguration.cs" />
     <Compile Include="EntityFramework\SortByExtension.cs" />
     <Compile Include="EntityFramework\TzDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

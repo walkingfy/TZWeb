@@ -36,7 +36,25 @@ namespace Tz.Repositories.EntityFramework
             get { return Set<Module>(); }
         }
 
+        public DbSet<AccountRole> AccountRoles
+        {
+            get { return Set<AccountRole>(); }
+        }
 
+        public DbSet<RolePermission> RolePermissions
+        {
+            get { return Set<RolePermission>(); }
+        }
+
+        #endregion
+
+        #region Protected Methods
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            
+                
+        }
         #endregion
     }
 }
