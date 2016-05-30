@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Tz.Core.Tools.BaseType
+namespace Tz.Core.Tools
 {
     /// <summary>
     /// 基元类型帮助类
