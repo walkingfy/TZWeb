@@ -55,7 +55,10 @@
     <Compile Include="Class1.cs" />
     <Compile Include="Enum\EnumHelper.cs" />
     <Compile Include="Json\JsonHelper.cs" />
+    <Compile Include="Log\LogHelper.cs" />
+    <Compile Include="MD5\MD5Helper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Regex\RegexHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
