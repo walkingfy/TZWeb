@@ -59,6 +59,8 @@
     <Compile Include="MD5\MD5Helper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Regex\RegexHelper.cs" />
+    <Compile Include="Web\CookieHelper.cs" />
+    <Compile Include="Web\SecurityCodeHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
