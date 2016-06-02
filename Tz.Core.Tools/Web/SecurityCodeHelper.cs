@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Security.Cryptography;
 using System.Web.Management;
 
@@ -147,7 +148,11 @@ namespace Tz.Core.Tools
         #endregion
 
         #region 构造函数
-
+        public SecurityCodeHelper()
+        {
+            this.text = Rand.Number(4);
+            CreateImage();
+        }
         #endregion
 
         #region 私有方法
@@ -170,8 +175,8 @@ namespace Tz.Core.Tools
         /// <summary>
         /// 获得下一个随机数
         /// </summary>
-        /// <param name="min"></param>
-        /// <param name="max"></param>
+        /// <param name="min">最小值</param>
+        /// <param name="max">最大值</param>
         /// <returns></returns>
         public static int Next(int min, int max)
         {
@@ -181,16 +186,59 @@ namespace Tz.Core.Tools
         #endregion
 
         #region 公共方法
-
+        /// <summary>
+        /// 绘制验证码
+        /// </summary>
         public void CreateImage()
         {
             int int_ImageWidth = this.text.Length*letterWidth;
             Bitmap image = new Bitmap(int_ImageWidth, letterHeight);
             Graphics g = Graphics.FromImage(image);
             g.Clear(Color.White);
-
+            for (int i = 0; i < 2; i++)
+            {
+                int x1 = Next(image.Width - 1);
+                int x2 = Next(image.Width - 1);
+                int y1 = Next(image.Height - 1);
+                int y2 = Next(image.Height - 1);
+                g.DrawLine(new Pen(Color.Silver), x1, y1, x2, y2);
+            }
+            int _x = -12, _y = 0;
+            for (int int_index = 0; int_index < this.text.Length; int_index++)
+            {
+                _x += Next(12, 16);
+                _y = Next(-2, 2);
+                string str_char = this.text.Substring(int_index, 1);
+                str_char = Next(1) == 1 ? str_char.ToLower() : str_char.ToUpper();
+                Brush newBrush = new SolidBrush(GetRandomColor());
+                Point thePoint = new Point(_x, _y);
+                g.DrawString(str_char, fonts[Next(fonts.Length - 1)], newBrush, thePoint);
+            }
+            for (int i = 0; i < 10; i++)
+            {
+                int x = Next(image.Width - 1);
+                int y = Next(image.Height - 1);
+                image.SetPixel(x,y,GetRandomColor());
+            }
+            image = TwistImage(image, true, Next(1, 3), Next(4, 6));
+            g.DrawRectangle(new Pen(Color.LightGray, 1), 0, 0, int_ImageWidth - 1, (letterHeight - 1));
+            this.image = image;
         }
-
+        /// <summary>
+        /// 获取随机颜色
+        /// </summary>
+        /// <returns></returns>
+        public Color GetRandomColor()
+        {
+            Random RandomNum_First = new Random((int) DateTime.Now.Ticks);
+            System.Threading.Thread.Sleep(RandomNum_First.Next(50));
+            Random RandomNum_Sencond = new Random((int) DateTime.Now.Ticks);
+            int int_Red = RandomNum_First.Next(180);
+            int int_Green = RandomNum_Sencond.Next(180);
+            int int_Blue = (int_Red + int_Green > 300) ? 0 : 400 - int_Red - int_Green;
+            int_Blue = (int_Blue > 255) ? 255 : int_Blue;
+            return Color.FromArgb(int_Red, int_Green, int_Blue);
+        }
         /// <summary>
         /// 正弦曲线Wave扭曲图片
         /// </summary>
