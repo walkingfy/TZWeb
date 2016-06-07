@@ -52,7 +52,6 @@
   <ItemGroup>
     <Compile Include="BaseType\BaseTypeHelper.cs" />
     <Compile Include="Cache\CacheHelper.cs" />
-    <Compile Include="Class1.cs" />
     <Compile Include="Enum\EnumHelper.cs" />
     <Compile Include="Json\JsonHelper.cs" />
     <Compile Include="Log\LogHelper.cs" />
@@ -61,6 +60,9 @@
     <Compile Include="Regex\RegexHelper.cs" />
     <Compile Include="Web\CookieHelper.cs" />
     <Compile Include="Web\SecurityCodeHelper.cs" />
+    <Compile Include="Web\SessionHelper.cs" />
+    <Compile Include="Web\WebHelper.cs" />
+    <Compile Include="Xml\XmlHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
