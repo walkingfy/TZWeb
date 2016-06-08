@@ -14,11 +14,11 @@ namespace TZWeb
             AreaRegistration.RegisterAllAreas();
             //WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
-            //RouteConfig.RegisterRoutes(RouteTable.Routes);
-            RegisterRoutes(RouteTable.Routes);
+            RouteConfig.RegisterRoutes(RouteTable.Routes);
+            //RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            AutofacInstace.InitServiceInstace();
+            //AutofacInstace.InitServiceInstace();
         }
 
         public static void RegisterRoutes(RouteCollection routes)
