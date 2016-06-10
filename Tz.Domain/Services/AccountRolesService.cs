@@ -19,7 +19,11 @@ namespace Tz.Domain.Services
             this._repositoryContext = repositoryContext;
             this._accountRoleRepository = repository;
         }
-
+        /// <summary>
+        /// 修改账户角色
+        /// </summary>
+        /// <param name="account">账户</param>
+        /// <param name="roles">多个角色</param>
         public void ModifyAccountRole(Account account, IList<Guid> roles)
         {
             if (account == null)
@@ -30,9 +34,9 @@ namespace Tz.Domain.Services
             {
                 throw new CustomException("roles不能为空","0500",LogLevel.Warning);
             }
-
+            //先删除原有角色
             _accountRoleRepository.RemoveAllRoleByAccount(account);
-
+            //添加新角色
             foreach (var roleId in roles)
             {
                 _accountRoleRepository.Add(new AccountRole(account.Id,roleId)

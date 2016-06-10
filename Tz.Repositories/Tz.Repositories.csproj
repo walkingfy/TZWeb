@@ -61,10 +61,18 @@
     <Compile Include="EntityFramework\ModelConfigurations\RoleTypeConfiguration.cs" />
     <Compile Include="EntityFramework\SortByExtension.cs" />
     <Compile Include="EntityFramework\TzDbContext.cs" />
+    <Compile Include="EntityFramework\TzDbContextInitializer.cs" />
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="ModuleRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RoleModuleRepository.cs" />
+    <Compile Include="RoleRepository.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Tz.Core.Tools\Tz.Core.Tools.csproj">
+      <Project>{97e1e245-d876-442f-a58e-bfc8aa6fae0d}</Project>
+      <Name>Tz.Core.Tools</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Tz.Core\Tz.Core.csproj">
       <Project>{ffe0e312-8174-41b2-abc6-925a14db4488}</Project>
       <Name>Tz.Core</Name>

@@ -21,5 +21,14 @@ namespace Tz.Application
             builder.RegisterType<AccountRolesService>();
 
         }
+        /// <summary>
+        /// 解析值
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public static T Resolve<T>()
+        {
+            return Container.Resolve<T>();
+        }
     }
 }

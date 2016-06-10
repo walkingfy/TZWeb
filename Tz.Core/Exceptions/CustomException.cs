@@ -72,6 +72,45 @@ namespace Tz.Core.Exceptions
         {
         }
         /// <summary>
+        /// 获取错误消息
+        /// </summary>
+        /// <returns></returns>
+        private string GetMessage()
+        {
+            var result=new StringBuilder();
+            AppendSelfMessage(result);
+            AppendInnerMessage(result,InnerException);
+            return result.ToString().TrimEnd(Environment.NewLine.ToCharArray());
+        }
+        /// <summary>
+        /// 添加本身消息
+        /// </summary>
+        /// <param name="result"></param>
+        private void AppendSelfMessage(StringBuilder result)
+        {
+            if(string.IsNullOrWhiteSpace(base.Message))
+                return;
+            result.AppendLine(base.Message);
+        }
+        /// <summary>
+        /// 添加内部异常消息
+        /// </summary>
+        /// <param name="result"></param>
+        /// <param name="exception"></param>
+        private void AppendInnerMessage(StringBuilder result, Exception exception)
+        {
+            if(exception == null)
+                return;
+            if (exception is CustomException)
+            {
+                result.AppendLine(exception.Message);
+                return;
+            }
+            result.AppendLine(exception.Message);
+            result.Append(GetData(exception));
+            AppendInnerMessage(result,exception.InnerException);
+        }
+        /// <summary>
         /// 获取添加的额外数据
         /// </summary>
         /// <param name="ex">异常</param>
@@ -100,6 +139,46 @@ namespace Tz.Core.Exceptions
                 if (Data.Count == 0)
                     return _message;
                 return _message + Environment.NewLine + GetData(this);
+            }
+        }
+        #endregion
+
+        #region TraceId(跟踪号)
+        /// <summary>
+        /// 跟踪号
+        /// </summary>
+        public string TraceId { get; set; }
+        #endregion
+
+        #region Code(错误码)
+        /// <summary>
+        /// 错误码
+        /// </summary>
+        public string Code { get; set; }
+        #endregion
+
+        #region Level(日志级别)
+        /// <summary>
+        /// 日志级别
+        /// </summary>
+        public LogLevel Level { get; set; }
+        #endregion
+
+        #region  StackTrace(堆栈跟踪)
+        /// <summary>
+        /// 堆栈跟踪
+        /// </summary>
+        public override string StackTrace
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(base.StackTrace))
+                {
+                    return base.StackTrace;
+                }
+                if (base.InnerException == null)
+                    return string.Empty;
+                return base.InnerException.StackTrace;
             }
         }
         #endregion

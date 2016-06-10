@@ -39,6 +39,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tz.Infrastructure", "Tz.Inf
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tz.Core.Tools", "Tz.Core.Tools\Tz.Core.Tools.csproj", "{97E1E245-D876-442F-A58E-BFC8AA6FAE0D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tz.DataObjects", "Tz.DataObjects\Tz.DataObjects.csproj", "{6646BFEC-39C8-4568-8543-91C987D17C0A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,6 +79,10 @@ Global
 		{97E1E245-D876-442F-A58E-BFC8AA6FAE0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{97E1E245-D876-442F-A58E-BFC8AA6FAE0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{97E1E245-D876-442F-A58E-BFC8AA6FAE0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6646BFEC-39C8-4568-8543-91C987D17C0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6646BFEC-39C8-4568-8543-91C987D17C0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6646BFEC-39C8-4568-8543-91C987D17C0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6646BFEC-39C8-4568-8543-91C987D17C0A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -90,6 +96,7 @@ Global
 		{FFE0E312-8174-41B2-ABC6-925A14DB4488} = {A7109B4F-CD05-4339-95F8-9E69968DF9D4}
 		{00690582-0B39-4BCD-8AAB-EC5B2A573E11} = {A7109B4F-CD05-4339-95F8-9E69968DF9D4}
 		{97E1E245-D876-442F-A58E-BFC8AA6FAE0D} = {A7109B4F-CD05-4339-95F8-9E69968DF9D4}
+		{6646BFEC-39C8-4568-8543-91C987D17C0A} = {D624DA36-8328-4AB4-A9CE-9CAFAF43FCF3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Validation.6.0.1304.0\lib\NET45

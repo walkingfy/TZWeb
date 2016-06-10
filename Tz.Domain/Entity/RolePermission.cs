@@ -9,7 +9,8 @@ namespace Tz.Domain.Entity
 
         public RolePermission(Guid roleId, Guid moduleId)
         {
-            
+            this.RoleId = roleId;
+            this.ModuleId = moduleId;
         }
 
 
