@@ -166,6 +166,15 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Content\Ace_admin\" />
+    <Folder Include="Areas\Admin\Content\bootbox\" />
+    <Folder Include="Areas\Admin\Content\Bootstrap_Switch\" />
+    <Folder Include="Areas\Admin\Content\Css\" />
+    <Folder Include="Areas\Admin\Content\iCheck\" />
+    <Folder Include="Areas\Admin\Content\layer\" />
+    <Folder Include="Areas\Admin\Content\magicsuggest\" />
+    <Folder Include="Areas\Admin\Content\pnotify\" />
+    <Folder Include="Areas\Admin\Content\zTree\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Models\" />
   </ItemGroup>
