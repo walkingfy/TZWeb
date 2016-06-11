@@ -11,8 +11,8 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TZWeb</RootNamespace>
-    <AssemblyName>TZWeb</AssemblyName>
+    <RootNamespace>TzWeb</RootNamespace>
+    <AssemblyName>TzWeb</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
@@ -125,6 +125,7 @@
     <Compile Include="Areas\Admin\Controllers\Filter\PermissionFilterAttribute.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\ModuleController.cs" />
+    <Compile Include="Areas\Admin\Controllers\RoleController.cs" />
     <Compile Include="ConfigSetting\ActionHelper.cs" />
     <Compile Include="ConfigSetting\ConfigSettingHelper.cs" />
     <Compile Include="ConfigSetting\CurrentUserHelper.cs" />
@@ -142,6 +143,7 @@
     <Content Include="Areas\Admin\Views\Account\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Account\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Home\Login.cshtml" />
+    <Content Include="Areas\Admin\Views\Module\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Module\Index.cshtml" />
     <Content Include="ConfigSetting\ConfigSettings.xml" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -163,8 +165,9 @@
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_LayoutForm.cshtml" />
-    <Content Include="Areas\Admin\Views\Module\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Module\SelectIcon.cshtml" />
+    <Content Include="Areas\Admin\Views\Role\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Role\Edit.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

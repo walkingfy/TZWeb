@@ -1,7 +1,173 @@
-﻿
-@{
-    ViewBag.Title = "Index";
-}
+﻿<style type="text/css">
+    .ui-jqgrid .tree-wrap-ltr {
+        float: left;
+    }
+</style>
+<div class="col-xs-12" id="ModuleBody">
+    <div id="toolbar">
+        <p>
+            <button class="btn btn-success" type="button" flag="create">
+                <i class="ace-icon fa fa-plus bigger-120"></i>
+                新增
+            </button>
+            <button class="btn btn-primary" type="button" flag="update">
+                <i class="ace-icon fa fa-edit bigger-120"></i>
+                修改
+            </button>
+            <button class="btn btn-warning" type="button" flag="delete">
+                <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                删除
+            </button>
+            <button class="btn btn-danger" type="button" flag="realdelete">
+                <i class="ace-icon fa fa-remove bigger-120"></i>
+                永久删除
+            </button>
+        </p>
+    </div>
+    <table id="grid-table"></table>
+    <div id="grid-pager"></div>
+</div>
+<script type="text/javascript">
+    $("#ModuleBody").ready(function () {
+        var gridSelector = "#grid-table";
+        var pagerSelector = "#grid-pager";
 
-<h2>Index</h2>
+        var jqGrid = xcore.JqGrid({
+            gridSelector: gridSelector,
+            pagerSelector: pagerSelector,
+            url: "GetGridData",
+            colNames: ['Id', 'ParentId', 'Controller', 'Action', '名称', '类型', '图标', '链接地址', '排序值', '备注', '是否有效'],
+            colModel: [
+                { name: 'Id', width: 1, hidden: true },
+                { name: 'ParentId', width: 1, hidden: true },
+                { name: 'Controller', width: 1, hidden: true },
+                { name: 'Action', width: 1, hidden: true },
+                { name: 'Name', sortable: false, width: 90 },
+                {
+                    name: 'Type', sortable: false, width: 90, formatter: function (cellvalue, options, html) {
+                        switch (cellvalue) {
+                            case 1:
+                                return "菜单";
+                            case 2:
+                                return "按钮";
+                            case 3:
+                                return "请求";
+                        };
+                    }, unformat: function (cellvalue, options, html) {
+                        switch (cellvalue) {
+                            case "菜单":
+                                return 1;
+                            case "按钮":
+                                return 2;
+                            case "请求":
+                                return 3;
+                        };
+                    }
+                },
+                {
+                    name: 'Icon', sortable: false, width: 90, formatter: function (cellvalue, options, html) {
+                        return "<i class='" + cellvalue + "'></i>";
+                    }, unformat: function (cellvalue, options, html) {
+                        return $("i", html).attr("class");
+                    }
+                },
+                { name: 'LinkAddress', sortable: false, width: 90 },
+                { name: 'Sort', sortable: false, width: 90 },
+                { name: 'Remark', width: 150 },
+                {
+                    name: 'IsVisible', width: 70, formatter: function (cellvalue) {
+                        if (cellvalue == true) {
+                            cellvalue = "<i class='ace-icon fa fa-check-circle green'></i>";
+                        } else
+                            cellvalue = "<i class='ace-icon fa fa-times-circle red'></i>";
+                        return cellvalue;
+                    }, unformat: function (cellvalue, options, html) {
+                        if ($(html).html() != "" && $(html).html().indexOf("ace-icon fa fa-check-circle green") >= 0) {
+                            return true;
+                        } else
+                            return false;
+                    }
+                }
+            ],
+            caption: "模块列表",
+            treeGrid: true,//启用树型Grid功能
+            treeIcons: { plus: 'ace-icon fa fa-plus', minus: 'ace-icon fa fa-minus', leaf: 'ace-icon fa fa-dot-circle-o' },
+            treeGridModel: 'adjacency',//表示返回数据的读取类型，分为两种：和adjacency
+            ExpandColumn: 'Name'//树型结构在哪列显示
+        });
 
+        function setSelect(dialog, rowData) {
+            xcore.ajax("GetAllController", null, function (result) {
+                $.each(result, function (key, value) {
+                    $("#Controller", dialog).append("<option value='" + value.ControllerName + "'>" + value.ControllerName + "(" + value.Description + ")</option>");
+                });
+                if (rowData && rowData.Id != "") {
+                    //获取值
+                    xcore.ajax("GetAction", { controllName: rowData.Controller }, function (options) {
+                        $.each(options, function (key, value) {
+                            $("#Action", dialog).append("<option value='" + value.ActionName + "'>" + value.ActionName + "(" + value.Description + ")</option>");
+                        });
+                        $("#Action", dialog).val(rowData.Action);
+                    });
+                    $("#Controller", dialog).val(rowData.Controller);
+                }
+            });
+        }
+
+        $("#toolbar button").bind('click', function () {
+            var btn = $(this).attr("flag");
+            switch (btn) {
+                case "create":
+                    var parentId = "";
+                    var rowId = jqGrid.jqGrid('getGridParam', 'selrow');
+                    if (rowId && rowId != "") {
+                        var rowData = jqGrid.jqGrid('getRowData', rowId);
+                        parentId = rowData.Id;
+                    }
+                    xcore.showEditHtml({
+                        url: "Edit",
+                        saveurl: "Create",
+                        width: 700,
+                        height: 600,
+                        titleIcon: "fa-plus",
+                        title: "新增",
+                        closeCallBack: function () {
+                            xcore.JqGridReLoad(jqGrid);
+                        }
+                    }, function (dialog) {
+                        $("#ParentId", dialog).val(parentId);
+                        setSelect(dialog);
+                    });
+                    break;
+                case "update":
+                    var rowData = xcore.GetSelectJqGridRow(jqGrid);
+                    if (rowData) {
+                        xcore.showEditHtml({
+                            url: "Edit",
+                            saveurl: "Update",
+                            width: 700,
+                            height: 600,
+                            titleIcon: "fa-edit",
+                            title: "修改",
+                            closeCallBack: function () {
+                                xcore.JqGridReLoad(jqGrid);
+                            }
+                        }, function (dialog) {
+                            xcore.setFields(rowData, dialog);
+                            setSelect(dialog, rowData);
+                            //$("#ParentId", dialog).val(rowData.ParentId);
+                            //$("#Id", dialog).val(rowData.Id);
+                            $("#IconStyle", dialog).attr("class", rowData.Icon + " bigger-130");
+                        });
+                    }
+                    break;
+                case "delete":
+                    xcore.showDelete(jqGrid);
+                    break;
+                case "realdelete":
+                    xcore.showRealDelete(jqGrid);
+                    break;
+            }
+        });
+    });
+</script>

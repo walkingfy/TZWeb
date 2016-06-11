@@ -10,7 +10,7 @@ using Tz.DataObjects;
 using TzWeb.Areas.Admin.Controllers;
 using TzWeb.ConfigSetting;
 
-namespace TZWeb.Areas.Admin.Controllers
+namespace TzWeb.Areas.Admin.Controllers
 {
     [Description("模块")]
     public class ModuleController : BaseController

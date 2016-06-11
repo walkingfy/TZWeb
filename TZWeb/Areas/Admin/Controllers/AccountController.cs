@@ -9,7 +9,7 @@ using Tz.DataObjects;
 using TzWeb;
 using TzWeb.Areas.Admin.Controllers;
 
-namespace TZWeb.Areas.Admin.Controllers
+namespace TzWeb.Areas.Admin.Controllers
 {
     [Description("账号模块")]
     public class AccountController : BaseController
