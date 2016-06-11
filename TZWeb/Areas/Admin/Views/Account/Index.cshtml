@@ -1,0 +1,146 @@
+﻿<div class="col-xs-12" id="AccountBody">
+    <div id="toolbar">
+        <p>
+            <button class="btn btn-success" type="button" flag="create">
+                <i class="ace-icon fa fa-plus bigger-120"></i>
+                新增
+            </button>
+            <button class="btn btn-primary" type="button" flag="update">
+                <i class="ace-icon fa fa-edit bigger-120"></i>
+                修改
+            </button>
+            <button class="btn btn-warning" type="button" flag="delete">
+                <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                删除
+            </button>
+            <button class="btn btn-success" type="button" flag="resetpwd">
+                <i class="ace-icon fa fa-rotate-left bigger-120"></i>
+                重置密码
+            </button>
+            <button class="btn btn-danger" type="button" flag="realdelete">
+                <i class="ace-icon fa fa-remove bigger-120"></i>
+                永久删除
+            </button>
+        </p>
+    </div>
+    <table id="grid-table"></table>
+    <div id="grid-pager"></div>
+</div>
+<script type="text/javascript">
+    $("#AccountBody").ready(function () {
+        var dom = $("#AccountBody");
+        var gridSelector = $("#grid-table", dom);
+        var pagerSelector = $("#grid-pager", dom);
+
+        var jqGrid = xcore.JqGrid({
+            gridSelector: gridSelector,
+            pagerSelector: pagerSelector,
+            url: "GetGridData",
+            colNames: ['Id', '密码', '用户名', '邮箱', '联系方式', '真实姓名', '备注', '是否有效'],
+            colModel: [
+                { name: 'Id', width: 1, hidden: true },
+                { name: 'Password', width: 1, hidden: true },
+                { name: 'Name', sortable: false, width: 90 },
+                { name: 'Email', sortable: false, width: 90 },
+                { name: 'Phone', sortable: false, width: 90 },
+                { name: 'RealName', sortable: false, width: 90 },
+                { name: 'Remark', width: 150 },
+                {
+                    name: 'IsVisible', width: 70, formatter: function (cellvalue) {
+                        if (cellvalue == true) {
+                            cellvalue = "<i class='ace-icon fa fa-check-circle green'></i>";
+                        } else
+                            cellvalue = "<i class='ace-icon fa fa-times-circle red'></i>";
+                        return cellvalue;
+                    }, unformat: function (cellvalue, options, html) {
+                        if ($(html).html() != "" && $(html).html().indexOf("ace-icon fa fa-check-circle green") >= 0) {
+                            return true;
+                        } else
+                            return false;
+                    }
+                }
+            ],
+            caption: "用户列表"
+        });
+
+        function setSelect(dialog, callback) {
+            xcore.ajax("/Role/GetSelectData", null, function (result) {
+                var magicSuggest = $("#selectRoles", dialog).magicSuggest({
+                    allowFreeEntries: false,
+                    required: true,
+                    placeholder: '请下拉选择角色',
+                    name: "RoleIds",
+                    data: result,
+                    valueField: "Id",
+                    displayField: "Name",
+                    renderer: function (data) {
+                        return data.Name + (data.Remark && data.Remark != "" ? ' (<b>' + data.Remark + '</b>)' : "");
+                    }
+                });
+                if (callback && typeof (callback) == "function") {
+                    callback(magicSuggest);
+                }
+            });
+        }
+
+        $("#toolbar button").bind('click', function () {
+            var btn = $(this).attr("flag");
+            switch (btn) {
+                case "create":
+                    xcore.showEditHtml({
+                        url: "Edit",
+                        saveurl: "Create",
+                        width: 500,
+                        height: 300,
+                        titleIcon: "fa-plus",
+                        title: "新增",
+                        closeCallBack: function () {
+                            xcore.JqGridReLoad(jqGrid);
+                        }
+                    }, function (dialog) {
+                        setSelect(dialog);
+                    });
+                    break;
+                case "update":
+                    var rowData = xcore.GetSelectJqGridRow(jqGrid);
+                    if (rowData) {
+                        xcore.showEditHtml({
+                            url: "Edit",
+                            saveurl: "Update",
+                            width: 500,
+                            height: 300,
+                            titleIcon: "fa-edit",
+                            title: "修改",
+                            closeCallBack: function () {
+                                xcore.JqGridReLoad(jqGrid);
+                            }
+                        }, function (dialog) {
+                            xcore.setFields(rowData, dialog);
+                            setSelect(dialog, function (ms) {
+                                xcore.ajax("GetAccountRole", { accountGuid: rowData.Id }, function (result) {
+                                    ms.setValue(result);
+                                });
+                            });
+
+                        });
+                    }
+                    break;
+                case "delete":
+                    xcore.showDelete(jqGrid);
+                    break;
+                case "realdelete":
+                    xcore.showRealDelete(jqGrid);
+                    break;
+                case "resetpwd":
+                    var rowData = xcore.GetSelectJqGridRow(jqGrid);
+                    xcore.showConfirm("确定要重置密码吗？", function () {
+                        xcore.ajax("ResetPassword", rowData, function (result) {
+                            xcore.showOperationMsg(result, "notify");
+                            xcore.JqGridReLoad(jqGrid);
+                        });
+                    });
+                    break;
+            }
+        });
+    });
+</script>

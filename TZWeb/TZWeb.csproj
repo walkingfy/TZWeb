@@ -117,12 +117,14 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
     <Compile Include="Areas\Admin\Controllers\Attribute\AnonymousAttribute.cs" />
     <Compile Include="Areas\Admin\Controllers\Attribute\LoginAllowViewAttribute.cs" />
     <Compile Include="Areas\Admin\Controllers\Attribute\ViewPageAttribute.cs" />
     <Compile Include="Areas\Admin\Controllers\BaseController.cs" />
     <Compile Include="Areas\Admin\Controllers\Filter\PermissionFilterAttribute.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ModuleController.cs" />
     <Compile Include="ConfigSetting\ActionHelper.cs" />
     <Compile Include="ConfigSetting\ConfigSettingHelper.cs" />
     <Compile Include="ConfigSetting\CurrentUserHelper.cs" />
@@ -135,6 +137,12 @@
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Content Include="Areas\Admin\Scripts\bootstrap3-validation.js" />
+    <Content Include="Areas\Admin\Scripts\html5.js" />
+    <Content Include="Areas\Admin\Views\Account\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\Login.cshtml" />
+    <Content Include="Areas\Admin\Views\Module\Index.cshtml" />
     <Content Include="ConfigSetting\ConfigSettings.xml" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -154,7 +162,9 @@
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Home\Login.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_LayoutForm.cshtml" />
+    <Content Include="Areas\Admin\Views\Module\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Module\SelectIcon.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
