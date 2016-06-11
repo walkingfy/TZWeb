@@ -69,7 +69,7 @@ namespace Tz.Application
         /// 获取所有模块
         /// </summary>
         /// <returns></returns>
-        public List<ZTreeData> GetAllModuleForZtree()
+        public List<ZTreeData> GetAllModuleForZTree()
         {
             var data = new List<ZTreeData>();
             var modules = _moduleRepository.GetAll().ToList();

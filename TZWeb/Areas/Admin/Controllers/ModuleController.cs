@@ -101,16 +101,16 @@ namespace TZWeb.Areas.Admin.Controllers
         [Description("根据控制器获取所有动作")]
         public JsonResult GetAction(string controllName)
         {
-            IList<MvcActionDataObject> allAction;
+            IList<MVCActionDataObject> allAction;
             if (CacheHelper.GetCache("MvcAction") == null)
             {
-                IList<MvcControllerDataObject> allController;
+                IList<MVCControllerDataObject> allController;
                 allAction = ActionHelper.GetAllActionByAssembly(out allController);
                 CacheHelper.SetCache("MvcAction", allAction);
                 CacheHelper.SetCache("MvcController", allController);
             }
             else
-                allAction = CacheHelper.GetCache("MvcAction") as IList<MvcActionDataObject>;
+                allAction = CacheHelper.GetCache("MvcAction") as IList<MVCActionDataObject>;
 
             if (allAction != null)
                 return this.Json(allAction.Where(t => t.ControllerName == controllName), JsonRequestBehavior.AllowGet);
