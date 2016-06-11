@@ -81,7 +81,7 @@ namespace TzWeb.Areas.Admin.Controllers
             //Action权限验证
             if (controllerName.ToLower() != "manage")
             {
-                var service =new RoleModuleAppService();
+                var service =new RolePermissionAppService();
 
                 if (!service.GetUserRoleIsHavePermission(CurrentUserHelper.GetUserRoles(),controllerName, actionName))
                 {

@@ -68,7 +68,7 @@
     <Compile Include="Services\AccountRolesService.cs" />
     <Compile Include="Services\AccountService.cs" />
     <Compile Include="Services\ModuleService.cs" />
-    <Compile Include="Services\RoleModuleService.cs" />
+    <Compile Include="Services\RolePermissionService.cs" />
     <Compile Include="Services\RoleService.cs" />
     <Compile Include="Specification\AndNotSpecification.cs" />
     <Compile Include="Specification\AndSpecification.cs" />

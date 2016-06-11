@@ -1,7 +1,37 @@
-﻿
-@{
-    ViewBag.Title = "Edit";
+﻿@{
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutForm.cshtml";
 }
 
-<h2>Edit</h2>
+<div class="col-xs-12">
+    <form id="editForm" class="form-horizontal" role="form">
+        <div class="alert alert-warning hidden" id="msgAlert">
+            <span id="spErrorMsg"></span>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-2 control-label no-padding-right" for="Name"> 角色名称 </label>
+            <span class="col-xs-7">
+                <input field="Name" type="text" id="Name" name="Name" class="col-xs-12" placeholder="角色名称" check-type="required" />
+            </span>
+        </div>
 
+        <div class="form-group">
+            <label class="col-xs-2 control-label no-padding-right" for="IsVisible"> 是否有效 </label>
+            <div class="col-xs-7">
+                <input type="checkbox" ctype="switch" id="IsVisible" name="IsVisible" field="IsVisible" data-size="small" data-off-text="No" data-on-text="Yes">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-xs-2 control-label no-padding-right" for="Remark"> 备注 </label>
+            <div class="col-xs-7">
+                <textarea field="Remark" id="Remark" name="Remark" class="col-xs-12" maxlength="200"></textarea>
+            </div>
+        </div>
+        <input type="hidden" id="Id" name="Id" field="Id" />
+    </form>
+</div>
+<script type="text/javascript">
+    $(function () {
+        xcore.initForm($("#editForm"));
+    });
+</script>

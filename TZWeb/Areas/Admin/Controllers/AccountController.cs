@@ -6,8 +6,6 @@ using System.Web;
 using System.Web.Mvc;
 using Tz.Application;
 using Tz.DataObjects;
-using TzWeb;
-using TzWeb.Areas.Admin.Controllers;
 
 namespace TzWeb.Areas.Admin.Controllers
 {

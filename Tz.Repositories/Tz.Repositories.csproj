@@ -57,7 +57,7 @@
     <Compile Include="EntityFramework\ModelConfigurations\AccountRoleTypeConfiguration.cs" />
     <Compile Include="EntityFramework\ModelConfigurations\AccountTypeConfiguration.cs" />
     <Compile Include="EntityFramework\ModelConfigurations\ModuleTypeConfiguration.cs" />
-    <Compile Include="EntityFramework\ModelConfigurations\RoleModuleTypeConfiguration.cs" />
+    <Compile Include="EntityFramework\ModelConfigurations\RolePermissionTypeConfiguration.cs" />
     <Compile Include="EntityFramework\ModelConfigurations\RoleTypeConfiguration.cs" />
     <Compile Include="EntityFramework\SortByExtension.cs" />
     <Compile Include="EntityFramework\TzDbContext.cs" />
@@ -65,7 +65,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModuleRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RoleModuleRepository.cs" />
+    <Compile Include="RolePermissionRepository.cs" />
     <Compile Include="RoleRepository.cs" />
   </ItemGroup>
   <ItemGroup>

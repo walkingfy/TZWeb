@@ -1,0 +1,111 @@
+﻿<script src="~/Content/Ace_Admin/js/fuelux/fuelux.tree.min.js"></script>
+<script src="~/Content/zTree/js/jquery.ztree.all-3.5.min.js"></script>
+<link href="~/Content/zTree/css/zTreeStyle/metro.css" rel="stylesheet" />
+<div class="col-xs-12" id="RolePermissionBody">
+    <div class="col-xs-3">
+        <div class="widget-box widget-color-blue2">
+            <div class="widget-header">
+                <h4 class="widget-title lighter smaller">选择角色</h4>
+            </div>
+            <div class="widget-body">
+                <div class="widget-main padding-8">
+                    <div id="tree1" class="tree"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-9">
+        <div id="toolbar">
+            <p>
+                <button class="btn btn-success" type="button" flag="save">
+                    <i class="ace-icon fa fa-save bigger-120"></i>
+                    保存权限
+                </button>
+            </p>
+        </div>
+        <ul id="tree" class="ztree" style="width:560px; overflow:auto;"></ul>
+    </div>
+</div>
+<script type="text/javascript">
+    $("#RolePermissionBody").ready(function () {
+        //alert(123);
+        var zTree;
+        $("#toolbar button").bind('click', function () {
+            var btn = $(this).attr("flag");
+            switch (btn) {
+                case "save":
+                    if (!zTree) { xcore.showError("没有模块数据，请联系管理员！"); return false; }
+                    if (!roleId) { xcore.showError("请先选择角色"); return false; }
+
+                    var ids = [];
+                    var nodes = zTree.getCheckedNodes(true);
+                    $.each(nodes, function (key, value) {
+                        ids.push(value.id);
+                    });
+                    if (ids.length == 0) { xcore.showError("请选择角色对应模块"); return false; }
+
+                    xcore.ajax("SaveRolePermissions", { roleId: roleId, modules: ids }, function (result) {
+                        if (!result) {
+                            xcore.showError();//显示错误消息
+                        } else
+                            xcore.showSuccess();//显示成功消息
+                    });
+                    break;
+            }
+        });
+
+        var roleId = "";
+        xcore.ajax("/Role/GetTreeData", null, function (result) {
+            var treeData = new DataSourceTree({ data: result });
+            //$.each(result, function (key, value) {
+            //    treeData[value.name] = value;
+            //});
+            var tree = $('#tree1').ace_tree({
+                dataSource: treeData,
+                multiSelect: false,
+                loadingHTML: '<div class="tree-loading"><i class="ace-icon fa fa-refresh fa-spin blue"></i></div>',
+                'open-icon': 'ace-icon tree-minus',
+                'close-icon': 'ace-icon tree-plus',
+                'selectable': true,
+                'selected-icon': 'ace-icon fa fa-check',
+                'unselected-icon': 'ace-icon fa'
+            });
+
+            tree.on('updated', function (e, selects) {
+                if (!zTree) { xcore.showError("没有模块数据，请联系管理员！"); return false; }
+                var select = selects.info[0];
+                if (select && select.id) {
+                    xcore.ajax("GetRolePermissionsById", { roleId: select.id }, function (res) {
+                        var nodes = zTree.getNodes();
+                        $.each(res, function (key, value) {
+                            $.each(nodes, function (nodei, node) {
+                                if (value == node.id)
+                                    zTree.checkNode(node, true, true);
+                            });
+                        });
+                    });
+                    //给JS赋值
+                    roleId = select.id;
+                }
+            });
+        });
+
+        //加载Tree
+        var setting = {
+            async: false,
+            check: {
+                enable: true
+            },
+            data: {
+                simpleData: {
+                    enable: true
+                }
+            }
+        };
+
+        xcore.ajax("/Module/GetZTreeData", null, function (result) {
+            var t = $("#tree");
+            zTree = $.fn.zTree.init(t, setting, result);
+        });
+    });
+</script>

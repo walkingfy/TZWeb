@@ -36,7 +36,7 @@ namespace TzWeb.Areas.Admin.Controllers
 
         public JsonResult GetMenus()
         {
-            var appService = new RoleModuleAppService();
+            var appService = new RolePermissionAppService();
             var modules = new List<ModuleDataObject>();
             if (CurrentUserHelper.GetUserId() == ConfigSettingHelper.GetAdminUserId())
             {

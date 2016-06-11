@@ -1,7 +1,75 @@
-﻿
-@{
-    ViewBag.Title = "Index";
-}
+﻿<div class="col-xs-12" id="RoleBody">
+    <div id="toolbar">
+        <p>
+            <button class="btn btn-success" type="button" flag="create">
+                <i class="ace-icon fa fa-plus bigger-120"></i>
+                新增
+            </button>
+            <button class="btn btn-primary" type="button" flag="update">
+                <i class="ace-icon fa fa-edit bigger-120"></i>
+                修改
+            </button>
+            <button class="btn btn-warning" type="button" flag="delete">
+                <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                删除
+            </button>
+            <button class="btn btn-danger" type="button" flag="realdelete">
+                <i class="ace-icon fa fa-remove bigger-120"></i>
+                永久删除
+            </button>
+        </p>
+    </div>
+    <table id="grid-table"></table>
+    <div id="grid-pager"></div>
+</div>
+<script type="text/javascript">
+    $("#RoleBody").ready(function () {
+        var gridSelector = "#grid-table";
+        var pagerSelector = "#grid-pager";
 
-<h2>Index</h2>
+        var jqGrid = xcore.JqGrid({
+            gridSelector: gridSelector,
+            pagerSelector: pagerSelector,
+            url: "GetGridData",
+            colNames: ['Id', '名称', '备注', '是否有效'],
+            colModel: [
+                { name: 'Id', width: 1, hidden: true },
+                { name: 'Name', sortable: false, width: 90 },
+                { name: 'Remark', width: 150 },
+                {
+                    name: 'IsVisible', width: 70, formatter: function (cellvalue) {
+                        if (cellvalue == true) {
+                            cellvalue = "<i class='ace-icon fa fa-check-circle green'></i>";
+                        } else
+                            cellvalue = "<i class='ace-icon fa fa-times-circle red'></i>";
+                        return cellvalue;
+                    }, unformat: function (cellvalue, options, html) {
+                        if ($(html).html() != "" && $(html).html().indexOf("ace-icon fa fa-check-circle green") >= 0) {
+                            return true;
+                        } else
+                            return false;
+                    }
+                }
+            ],
+            caption: "角色列表"
+        });
 
+        $("#toolbar button").bind('click', function () {
+            var btn = $(this).attr("flag");
+            switch (btn) {
+                case "create":
+                    xcore.showAddPage(jqGrid);
+                    break;
+                case "update":
+                    xcore.showUpdatePage(jqGrid);
+                    break;
+                case "delete":
+                    xcore.showDelete(jqGrid);
+                    break;
+                case "realdelete":
+                    xcore.showRealDelete(jqGrid);
+                    break;
+            }
+        });
+    });
+</script>
