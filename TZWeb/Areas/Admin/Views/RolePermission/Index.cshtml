@@ -1,6 +1,6 @@
-﻿<script src="~/Content/Ace_Admin/js/fuelux/fuelux.tree.min.js"></script>
-<script src="~/Content/zTree/js/jquery.ztree.all-3.5.min.js"></script>
-<link href="~/Content/zTree/css/zTreeStyle/metro.css" rel="stylesheet" />
+﻿<script src="~/Areas/Admin/Content/Ace_Admin/js/fuelux/fuelux.tree.min.js"></script>
+<script src="~/Areas/Admin/Content/zTree/js/jquery.ztree.all-3.5.min.js"></script>
+<link href="~/Areas/Admin/Content/zTree/css/zTreeStyle/metro.css" rel="stylesheet" />
 <div class="col-xs-12" id="RolePermissionBody">
     <div class="col-xs-3">
         <div class="widget-box widget-color-blue2">
@@ -55,7 +55,7 @@
         });
 
         var roleId = "";
-        xcore.ajax("/Role/GetTreeData", null, function (result) {
+        xcore.ajax("/Admin/Role/GetTreeData", null, function (result) {
             var treeData = new DataSourceTree({ data: result });
             //$.each(result, function (key, value) {
             //    treeData[value.name] = value;
@@ -103,7 +103,7 @@
             }
         };
 
-        xcore.ajax("/Module/GetZTreeData", null, function (result) {
+        xcore.ajax("/Admin/Module/GetZTreeData", null, function (result) {
             var t = $("#tree");
             zTree = $.fn.zTree.init(t, setting, result);
         });

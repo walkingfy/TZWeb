@@ -150,7 +150,7 @@
                 data.UserName = $("#UserName").val();
                 data.Password = $("#Password").val();
                 data.IsRememberMe = $("#IsRememberMeVal").val();
-                $.post("/Account/UserLogin", data, function (result) {
+                $.post("/Admin/Account/UserLogin", data, function (result) {
                     $("#btnLogin").button('reset');
                     if (result.ResultType == "Error") {
                         $("#spErrorMsg").html(result.Message);

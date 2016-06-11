@@ -7,10 +7,9 @@ using Tz.Repositories.EntityFramework;
 
 namespace Tz.Repositories
 {
-    public class EntityFrameworkRepositoryContext : RepositoryContext ,IEntityFrameworkRepositoryContext
+    public class EntityFrameworkRepositoryContext : RepositoryContext, IEntityFrameworkRepositoryContext
     {
         private readonly ThreadLocal<TzDbContext> localCtx = new ThreadLocal<TzDbContext>(() => new TzDbContext());
-
 
         public override void RegisterDeleted<TAggregateRoot>(TAggregateRoot obj)
         {
@@ -18,9 +17,7 @@ namespace Tz.Repositories
             {
                 //判断状态是否分离，分离则附加
                 if (localCtx.Value.Entry<TAggregateRoot>(obj).State == EntityState.Detached)
-                {
                     localCtx.Value.Set<TAggregateRoot>().Attach(obj);
-                }
             }
             catch (Exception)
             {

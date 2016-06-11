@@ -19,7 +19,9 @@ namespace Tz.Application
             builder.RegisterModule(new ConfigurationSettingsReader("autofac"));
             builder.RegisterType<AccountService>();
             builder.RegisterType<AccountRolesService>();
-
+            builder.RegisterType<RoleService>();
+            builder.RegisterType<RolePermissionService>();
+            Container = builder.Build();
         }
         /// <summary>
         /// 解析值

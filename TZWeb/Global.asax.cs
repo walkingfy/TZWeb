@@ -18,7 +18,7 @@ namespace TzWeb
             RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            //AutofacInstace.InitServiceInstace();
+            AutofacInstace.InitServiceInstace();
         }
 
         public static void RegisterRoutes(RouteCollection routes)
