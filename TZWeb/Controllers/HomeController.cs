@@ -1,10 +1,9 @@
 ﻿using System.Web.Mvc;
 
-namespace TZWeb.Controllers
+namespace TzWeb.Controllers
 {
     public class HomeController : Controller
     {
-        // GET: Home
         public ActionResult Index()
         {
             return View();

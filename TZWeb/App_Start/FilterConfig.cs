@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace TZWeb
+namespace TzWeb
 {
     public class FilterConfig
     {

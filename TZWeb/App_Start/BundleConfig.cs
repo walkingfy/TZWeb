@@ -1,6 +1,6 @@
 ﻿using System.Web.Optimization;
 
-namespace TZWeb
+namespace TzWeb
 {
     public class BundleConfig
     {

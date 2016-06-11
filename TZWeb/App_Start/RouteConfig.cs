@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace TZWeb
+namespace TzWeb
 {
     public class RouteConfig
     {
@@ -13,7 +13,7 @@ namespace TZWeb
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
-                namespaces: new string[] { "TZWeb.Controllers" }
+                namespaces: new string[] { "TzWeb.Controllers" }
             );
         }
     }

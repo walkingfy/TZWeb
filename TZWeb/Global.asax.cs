@@ -3,7 +3,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using Tz.Application;
 
-namespace TZWeb
+namespace TzWeb
 {
     // 注意: 有关启用 IIS6 或 IIS7 经典模式的说明，
     // 请访问 http://go.microsoft.com/?LinkId=9394801
@@ -14,8 +14,8 @@ namespace TZWeb
             AreaRegistration.RegisterAllAreas();
             //WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
-            RouteConfig.RegisterRoutes(RouteTable.Routes);
-            //RegisterRoutes(RouteTable.Routes);
+            //RouteConfig.RegisterRoutes(RouteTable.Routes);
+            RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             //AutofacInstace.InitServiceInstace();
@@ -27,9 +27,11 @@ namespace TZWeb
 
             routes.MapRoute(
                 "Default",
-                "{contorller}/{action}/{id}",
-                new { contorller = "Home", action = "Index", id = UrlParameter.Optional }
+                "{controller}/{action}/{id}",
+                new { controller = "Home", action = "Index", id = UrlParameter.Optional },
+                new string[] { "TzWeb.Controllers" }
                 );
         }
+
     }
 }

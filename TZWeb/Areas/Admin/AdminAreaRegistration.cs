@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace TZWeb.Areas.Admin
+namespace TzWeb.Areas.Admin
 {
     public class AdminAreaRegistration : AreaRegistration 
     {
@@ -18,7 +18,7 @@ namespace TZWeb.Areas.Admin
                 "Admin_default",
                 "Admin/{controller}/{action}/{id}",
                 new { controller = "Home", action = "Index", id = UrlParameter.Optional },
-                namespaces: new string[] { "TZWeb.Areas.Admin.Controllers" }
+                new string[] { "TzWeb.Areas.Admin.Controllers" }
             );
         }
     }

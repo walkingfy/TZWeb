@@ -38,6 +38,17 @@ namespace Tz.Core.Tools
         }
 
         /// <summary>
+        /// 添加Session，调动有效期为20分钟
+        /// </summary>
+        /// <param name="strSessionName">Session对象名称</param>
+        /// <param name="strValues">Session值数组</param>
+        public static void AddSessions(string strSessionName, string[] strValues)
+        {
+            HttpContext.Current.Session[strSessionName] = strValues;
+            HttpContext.Current.Session.Timeout = 20;
+        }
+
+        /// <summary>
         /// 添加Session
         /// </summary>
         /// <param name="strSessionName">Session对象名称</param>
@@ -63,6 +74,23 @@ namespace Tz.Core.Tools
             else
             {
                 return HttpContext.Current.Session[strSessionName];
+            }
+        }
+
+        /// <summary>
+        /// 读取某个Session对象值数组
+        /// </summary>
+        /// <param name="strSessionName">Session对象名称</param>
+        /// <returns>Session对象值数组</returns>
+        public static string[] GetSessions(string strSessionName)
+        {
+            if (HttpContext.Current.Session[strSessionName] == null)
+            {
+                return null;
+            }
+            else
+            {
+                return (string[])HttpContext.Current.Session[strSessionName];
             }
         }
 

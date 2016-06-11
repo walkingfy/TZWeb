@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<config>
+  <!--这里都是虚拟路径(相对于Admin后台的)-->
+  <page>/Home/Login</page>
+  <Admin>
+    <!--管理员用户ID-->
+    <AdminUserID>92A8A431-9CE6-E411-BE9D-DC0EA183C1FA</AdminUserID>
+    <!--管理员角色身份-->
+    <AdminUserRoleID>9BEA3D55-9FE6-E411-BE9D-DC0EA183C1FA</AdminUserRoleID>
+  </Admin>
+</config>
