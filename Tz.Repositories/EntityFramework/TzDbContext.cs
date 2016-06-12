@@ -47,10 +47,13 @@ namespace Tz.Repositories.EntityFramework
             get { return Set<RolePermission>(); }
         }
 
+        public DbSet<Article> Articles
+        {
+            get { return Set<Article>(); }
+        }
         #endregion
 
         #region Protected Methods
-
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder
@@ -59,9 +62,9 @@ namespace Tz.Repositories.EntityFramework
                 .Add(new RoleTypeConfiguration())
                 .Add(new ModuleTypeConfiguration())
                 .Add(new AccountRoleTypeConfiguration())
-                .Add(new RolePermissionTypeConfiguration());
+                .Add(new RolePermissionTypeConfiguration())
+                .Add(new ArticleTypeConfiguration());
             base.OnModelCreating(modelBuilder);
-
         }
         #endregion
     }

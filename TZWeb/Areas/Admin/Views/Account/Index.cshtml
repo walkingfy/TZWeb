@@ -64,7 +64,7 @@
         });
 
         function setSelect(dialog, callback) {
-            xcore.ajax("/Role/GetSelectData", null, function (result) {
+            xcore.ajax("/Admin/Role/GetSelectData", null, function (result) {
                 var magicSuggest = $("#selectRoles", dialog).magicSuggest({
                     allowFreeEntries: false,
                     required: true,

@@ -33,7 +33,8 @@ namespace TzWeb.Areas.Admin.Controllers
             CurrentUserHelper.ClearUserInfo();
             return Redirect("Lgoin");
         }
-
+        [Description("【主页】获取用户菜单")]
+        [LoginAllowView]
         public JsonResult GetMenus()
         {
             var appService = new RolePermissionAppService();

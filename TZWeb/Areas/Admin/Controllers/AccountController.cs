@@ -27,14 +27,15 @@ namespace TzWeb.Areas.Admin.Controllers
             return View();
         }
         [Description("用户登录方法")]
-        [ViewPage]
-        [LoginAllowView]
+        [Anonymous]
+        [HttpPost]
         public JsonResult UserLogin(LoginModel login)
         {
             var result = base.GetModelValidate(login);
             if (result == null)
             {
                 var appService = new AccountAppService();
+                //默认密码888888加密 21218cca77804d2ba1922c33e0151105
                 var accountResult = appService.CheckAccount(login.UserName, login.Password);
                 if (accountResult.ResultType == OperationResultType.Success.ToString() && accountResult.AppendData != null)
                 {

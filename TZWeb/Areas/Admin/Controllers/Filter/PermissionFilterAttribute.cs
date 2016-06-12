@@ -52,6 +52,7 @@ namespace TzWeb.Areas.Admin.Controllers
         /// <returns></returns>
         protected virtual bool AuthorizeCore(ActionExecutingContext filterContext)
         {
+
             if (filterContext.HttpContext == null)
             {
                 throw new ArgumentNullException("filterContext");

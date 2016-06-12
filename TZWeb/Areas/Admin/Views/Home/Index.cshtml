@@ -1,7 +1,30 @@
-﻿
-@{
-    ViewBag.Title = "Index";
-}
+﻿<div>
+    <div class="alert alert-block alert-success">
+        <button type="button" class="close" data-dismiss="alert">
+            <i class="ace-icon fa fa-times"></i>
+        </button>
 
-<h2>Admin</h2>
+        <i class="ace-icon fa fa-exclamation-circle green"></i>
 
+        <strong class="green">
+            管理员
+        </strong>,
+        <span id="spinfo"></span>
+
+        <span id="bodycontent"></span>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        var now = new Date(), hour = now.getHours();
+        if (hour > 4 && hour < 6) { $("#spinfo").html("凌晨好！"); }
+        else if (hour < 9) { $("#spinfo").html("早上好！"); }
+        else if (hour < 12) { $("#spinfo").html("上午好！"); }
+        else if (hour < 14) { $("#spinfo").html("中午好！"); }
+        else if (hour < 17) { $("#spinfo").html("下午好！"); }
+        else if (hour < 19) { $("#spinfo").html("傍晚好！"); }
+        else if (hour < 22) { $("#spinfo").html("晚上好！"); }
+        else { $("#spinfo").html("夜深了，注意休息！"); }
+    });
+</script>

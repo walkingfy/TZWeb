@@ -484,6 +484,21 @@
     <Content Include="Areas\Admin\Content\Ace_admin\js\uncompressed\x-editable\bootstrap-editable.js" />
     <Content Include="Areas\Admin\Content\Ace_admin\js\x-editable\ace-editable.min.js" />
     <Content Include="Areas\Admin\Content\Ace_admin\js\x-editable\bootstrap-editable.min.js" />
+    <Content Include="Areas\Admin\Content\bootbox\bootbox.min.js" />
+    <Content Include="Areas\Admin\Content\Bootstrap_Switch\js\bootstrap-switch.js" />
+    <Content Include="Areas\Admin\Content\Bootstrap_Switch\js\bootstrap-switch.min.js" />
+    <Content Include="Areas\Admin\Content\layer\extend\layer.ext.js" />
+    <Content Include="Areas\Admin\Content\layer\layer.min.js" />
+    <Content Include="Areas\Admin\Content\layer\skin\default\icon_ext.png" />
+    <Content Include="Areas\Admin\Content\layer\skin\default\textbg.png" />
+    <Content Include="Areas\Admin\Content\layer\skin\default\xubox_ico0.png" />
+    <Content Include="Areas\Admin\Content\layer\skin\default\xubox_loading0.gif" />
+    <Content Include="Areas\Admin\Content\layer\skin\default\xubox_loading1.gif" />
+    <Content Include="Areas\Admin\Content\layer\skin\default\xubox_loading2.gif" />
+    <Content Include="Areas\Admin\Content\layer\skin\default\xubox_loading3.gif" />
+    <Content Include="Areas\Admin\Content\layer\skin\default\xubox_title0.png" />
+    <Content Include="Areas\Admin\Content\layer\skin\layer.css" />
+    <Content Include="Areas\Admin\Content\layer\skin\layer.ext.css" />
     <Content Include="Areas\Admin\Content\pnotify\pnotify.custom.min.css" />
     <Content Include="Areas\Admin\Content\pnotify\pnotify.custom.min.js" />
     <Content Include="Areas\Admin\Content\zTree\css\zTreeStyle\img\diy\1_close.png" />
@@ -505,8 +520,10 @@
     <Content Include="Areas\Admin\Content\zTree\index.html" />
     <Content Include="Areas\Admin\Content\zTree\js\jquery-1.4.4.min.js" />
     <Content Include="Areas\Admin\Content\zTree\js\jquery.ztree.all-3.5.min.js" />
+    <Content Include="Areas\Admin\Scripts\base\helper.js" />
     <Content Include="Areas\Admin\Scripts\bootstrap3-validation.js" />
     <Content Include="Areas\Admin\Scripts\html5.js" />
+    <Content Include="Areas\Admin\Scripts\json2.js" />
     <Content Include="Areas\Admin\Views\Account\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Account\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Home\Login.cshtml" />
@@ -713,11 +730,16 @@
     <Content Include="Areas\Admin\Content\Ace_admin\js\ace\readme" />
     <Content Include="Areas\Admin\Content\Ace_admin\js\ace\scripts.json" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\bootstrap3-validation.js" />
+    <Content Include="Scripts\html5.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery.pjax.js" />
+    <Content Include="Scripts\json2.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <None Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -735,15 +757,13 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Content\bootbox\" />
-    <Folder Include="Areas\Admin\Content\Bootstrap_Switch\" />
     <Folder Include="Areas\Admin\Content\Css\" />
     <Folder Include="Areas\Admin\Content\iCheck\" />
-    <Folder Include="Areas\Admin\Content\layer\" />
     <Folder Include="Areas\Admin\Content\magicsuggest\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\Base\" />
     <Folder Include="Models\" />
+    <Folder Include="Scripts\base\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

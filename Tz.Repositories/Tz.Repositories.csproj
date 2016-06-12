@@ -50,12 +50,14 @@
   <ItemGroup>
     <Compile Include="AccountRepository.cs" />
     <Compile Include="AccountRoleRepository.cs" />
+    <Compile Include="ArticleRepository.cs" />
     <Compile Include="EntityFramework\EntityFrameworkRepository.cs" />
     <Compile Include="EntityFramework\EntityFrameworkRepositoryContext.cs" />
     <Compile Include="EntityFramework\EnumTableName.cs" />
     <Compile Include="EntityFramework\IEntityFrameworkRepositoryContext.cs" />
     <Compile Include="EntityFramework\ModelConfigurations\AccountRoleTypeConfiguration.cs" />
     <Compile Include="EntityFramework\ModelConfigurations\AccountTypeConfiguration.cs" />
+    <Compile Include="EntityFramework\ModelConfigurations\ArticleTypeConfiguration.cs" />
     <Compile Include="EntityFramework\ModelConfigurations\ModuleTypeConfiguration.cs" />
     <Compile Include="EntityFramework\ModelConfigurations\RolePermissionTypeConfiguration.cs" />
     <Compile Include="EntityFramework\ModelConfigurations\RoleTypeConfiguration.cs" />

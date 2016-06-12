@@ -11,11 +11,10 @@ namespace Tz.Application
     public class AutofacInstace
     {
         public static IContainer Container { get; set; }
-
-        public static void InitServiceInstace()
+        public static void InitServiceInstance()
         {
             var builder = new ContainerBuilder();
-            builder.RegisterType<EntityFrameworkRepositoryContext>().As<IRepositoryContext>().InstancePerMatchingLifetimeScope();
+            builder.RegisterType<EntityFrameworkRepositoryContext>().As<IRepositoryContext>().InstancePerLifetimeScope();
             builder.RegisterModule(new ConfigurationSettingsReader("autofac"));
             builder.RegisterType<AccountService>();
             builder.RegisterType<AccountRolesService>();
@@ -23,6 +22,7 @@ namespace Tz.Application
             builder.RegisterType<RolePermissionService>();
             Container = builder.Build();
         }
+
         /// <summary>
         /// 解析值
         /// </summary>

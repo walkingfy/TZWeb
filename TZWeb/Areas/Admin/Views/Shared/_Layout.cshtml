@@ -87,7 +87,7 @@
             <!-- #section:basics/navbar.dropdown -->
             <div class="navbar-buttons navbar-header pull-right" role="navigation">
                 <ul class="nav ace-nav">
-                    <li class="grey">
+                    @*<li class="grey">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <i class="ace-icon fa fa-tasks"></i>
                             <span class="badge badge-grey">4</span>
@@ -302,7 +302,7 @@
                                 </a>
                             </li>
                         </ul>
-                    </li>
+                    </li>*@
                     <!-- #section:basics/navbar.user_menu -->
                     <li class="light-blue">
                         <a data-toggle="dropdown" href="#" class="dropdown-toggle">
@@ -486,7 +486,7 @@
     <script type="text/javascript">
         $(function () {
             //加载菜单
-            xcore.ajax("/Home/GetMenus", null, function (result) {
+            xcore.ajax("/Admin/Home/GetMenus", null, function (result) {
                 if (result != null && result.length > 0) {
                     var data = {};
                     data.menus = result;
@@ -505,7 +505,7 @@
                         } else {
                             $(this).addClass("active");
                             $(this).parent().parent().addClass("active open");//父级添加样式
-                            return false;
+                            //return false;
                         }
                     });
                 }
