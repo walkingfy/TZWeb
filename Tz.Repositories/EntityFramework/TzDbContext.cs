@@ -1,5 +1,5 @@
 ﻿using System.Data.Entity;
-
+using System.Data.Entity.ModelConfiguration.Conventions;
 using Tz.Domain.Entity;
 using Tz.Repositories.EntityFramework.ModelConfigurations;
 
