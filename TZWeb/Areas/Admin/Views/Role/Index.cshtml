@@ -30,7 +30,7 @@
         var jqGrid = xcore.JqGrid({
             gridSelector: gridSelector,
             pagerSelector: pagerSelector,
-            url: "GetGridData",
+            url: "/Admin/Role/GetGridData",
             colNames: ['Id', '名称', '备注', '是否有效'],
             colModel: [
                 { name: 'Id', width: 1, hidden: true },
@@ -58,7 +58,19 @@
             var btn = $(this).attr("flag");
             switch (btn) {
                 case "create":
-                    xcore.showAddPage(jqGrid);
+                    xcore.showEditHtml({
+                        url: "/Admin/Role/Edit",
+                        saveurl: "/Admin/Role/Create",
+                        width: 700,
+                        height: 600,
+                        titleIcon: "fa-plus",
+                        title: "新增",
+                        closeCallBack: function () {
+                            xcore.JqGridReLoad(jqGrid);
+                        }
+                    }, function (dialog) {
+
+                    });
                     break;
                 case "update":
                     xcore.showUpdatePage(jqGrid);

@@ -72,6 +72,7 @@
             data: data,
             dateType: dateType || "json",
             traditional: true,//阻止深度序列化
+            async: false,
             success: function (result) {
                 if (callback && typeof (callback) == "function")
                     callback(result);

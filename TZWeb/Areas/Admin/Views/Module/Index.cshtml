@@ -35,7 +35,7 @@
         var jqGrid = xcore.JqGrid({
             gridSelector: gridSelector,
             pagerSelector: pagerSelector,
-            url: "GetGridData",
+            url: "/Admin/Module/GetGridData",
             colNames: ['Id', 'ParentId', 'Controller', 'Action', '名称', '类型', '图标', '链接地址', '排序值', '备注', '是否有效'],
             colModel: [
                 { name: 'Id', width: 1, hidden: true },
@@ -97,13 +97,13 @@
         });
 
         function setSelect(dialog, rowData) {
-            xcore.ajax("GetAllController", null, function (result) {
+            xcore.ajax("/Admin/Module/GetAllController", null, function (result) {
                 $.each(result, function (key, value) {
                     $("#Controller", dialog).append("<option value='" + value.ControllerName + "'>" + value.ControllerName + "(" + value.Description + ")</option>");
                 });
                 if (rowData && rowData.Id != "") {
                     //获取值
-                    xcore.ajax("GetAction", { controllName: rowData.Controller }, function (options) {
+                    xcore.ajax("/Admin/Module/GetAction", { controllName: rowData.Controller }, function (options) {
                         $.each(options, function (key, value) {
                             $("#Action", dialog).append("<option value='" + value.ActionName + "'>" + value.ActionName + "(" + value.Description + ")</option>");
                         });
@@ -125,8 +125,8 @@
                         parentId = rowData.Id;
                     }
                     xcore.showEditHtml({
-                        url: "Edit",
-                        saveurl: "Create",
+                        url: "/Admin/Module/Edit",
+                        saveurl: "/Admin/Module/Create",
                         width: 700,
                         height: 600,
                         titleIcon: "fa-plus",
@@ -143,8 +143,8 @@
                     var rowData = xcore.GetSelectJqGridRow(jqGrid);
                     if (rowData) {
                         xcore.showEditHtml({
-                            url: "Edit",
-                            saveurl: "Update",
+                            url: "/Admin/Module/Edit",
+                            saveurl: "/Admin/Module/Update",
                             width: 700,
                             height: 600,
                             titleIcon: "fa-edit",

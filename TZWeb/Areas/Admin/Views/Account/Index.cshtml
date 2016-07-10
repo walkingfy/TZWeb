@@ -35,7 +35,7 @@
         var jqGrid = xcore.JqGrid({
             gridSelector: gridSelector,
             pagerSelector: pagerSelector,
-            url: "GetGridData",
+            url: "/Admin/Account/GetGridData",
             colNames: ['Id', '密码', '用户名', '邮箱', '联系方式', '真实姓名', '备注', '是否有效'],
             colModel: [
                 { name: 'Id', width: 1, hidden: true },
@@ -88,8 +88,8 @@
             switch (btn) {
                 case "create":
                     xcore.showEditHtml({
-                        url: "Edit",
-                        saveurl: "Create",
+                        url: "/Admin/Account/Edit",
+                        saveurl: "/Admin/Account/Create",
                         width: 500,
                         height: 300,
                         titleIcon: "fa-plus",
@@ -105,8 +105,8 @@
                     var rowData = xcore.GetSelectJqGridRow(jqGrid);
                     if (rowData) {
                         xcore.showEditHtml({
-                            url: "Edit",
-                            saveurl: "Update",
+                            url: "/Admin/Account/Edit",
+                            saveurl: "/Admin/Account/Update",
                             width: 500,
                             height: 300,
                             titleIcon: "fa-edit",
@@ -117,7 +117,7 @@
                         }, function (dialog) {
                             xcore.setFields(rowData, dialog);
                             setSelect(dialog, function (ms) {
-                                xcore.ajax("GetAccountRole", { accountGuid: rowData.Id }, function (result) {
+                                xcore.ajax("/Admin/Account/GetAccountRole", { accountGuid: rowData.Id }, function (result) {
                                     ms.setValue(result);
                                 });
                             });
