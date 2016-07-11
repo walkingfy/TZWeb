@@ -781,6 +781,10 @@
       <Project>{6646bfec-39c8-4568-8543-91c987d17c0a}</Project>
       <Name>Tz.DataObjects</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Tz.Domain\Tz.Domain.csproj">
+      <Project>{25C2F5C0-4BF3-4A82-89E2-CA9E8850FC53}</Project>
+      <Name>Tz.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

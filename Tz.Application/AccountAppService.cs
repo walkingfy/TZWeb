@@ -87,8 +87,9 @@ namespace Tz.Application
         public OperationResult AddAccount(AccountDataObject entity)
         {
             var account = OperationBaseService.ProcessMapper<AccountDataObject, Account>(entity, OperationType.Add);
+            account = _accountService.AddAccount(account);
             _accountRolesService.ModifyAccountRole(account, entity.RoleIds);
-            return OperationAccount(entity, OperationType.Add);
+            return new OperationResult(OperationResultType.Success, "操作成功", account);
         }
         /// <summary>
         /// 修改用户

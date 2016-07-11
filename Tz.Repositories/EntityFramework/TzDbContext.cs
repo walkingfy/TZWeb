@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 
 using Tz.Domain.Entity;
 using Tz.Repositories.EntityFramework.ModelConfigurations;
@@ -67,5 +68,6 @@ namespace Tz.Repositories.EntityFramework
             base.OnModelCreating(modelBuilder);
         }
         #endregion
+        
     }
 }

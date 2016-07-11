@@ -8,6 +8,7 @@ using Tz.Domain.Repositories;
 using Tz.Domain.Specifications;
 using Tz.Repositories.EntityFramework;
 using Tz.Infrastructure;
+using System.Data.Entity.Infrastructure;
 
 namespace Tz.Repositories
 {
@@ -101,7 +102,7 @@ namespace Tz.Repositories
         protected override IEnumerable<TAggregateRoot> DoFindAll(ISpecification<TAggregateRoot> specification,
             Expression<Func<TAggregateRoot, dynamic>> sortPredicate, SortOrder sortOrder)
         {
-            var query = efContext.Context.Set<TAggregateRoot>()
+            var query = efContext.Context.Set<TAggregateRoot>().AsNoTracking()
                 .Where(specification.GetExpression());
             if (sortPredicate != null)
             {
@@ -129,7 +130,7 @@ namespace Tz.Repositories
             {
                 throw new ArgumentOutOfRangeException("pageSize",pageSize,"每页大小必须大于等于1。");
             }
-            var query = efContext.Context.Set<TAggregateRoot>()
+            var query = efContext.Context.Set<TAggregateRoot>().AsNoTracking()
                 .Where(specification.GetExpression());
             int skip = (pageNumber - 1)*pageSize;
             int take = pageSize;
@@ -195,11 +196,13 @@ namespace Tz.Repositories
 
         protected override void DoRemove(TAggregateRoot aggregateRoot)
         {
+            RemoveHoldingEntityInContext(aggregateRoot);
             efContext.RegisterDeleted<TAggregateRoot>(aggregateRoot);
         }
 
         protected override void DoUpdate(TAggregateRoot aggregateRoot)
         {
+            RemoveHoldingEntityInContext(aggregateRoot);
             efContext.RegisterModified<TAggregateRoot>(aggregateRoot);
         }
 
@@ -351,6 +354,23 @@ namespace Tz.Repositories
             if (result == null)
                 throw new ArgumentException("无法根据指定的查询条件找到所需的聚合根。");
             return result;
+        }
+
+        private Boolean RemoveHoldingEntityInContext(TAggregateRoot entity)
+        {
+            var objContext = ((IObjectContextAdapter)efContext.Context).ObjectContext;
+            var objSet = objContext.CreateObjectSet<TAggregateRoot>();
+            var entityKey = objContext.CreateEntityKey(objSet.EntitySet.Name, entity);
+
+            Object foundEntity;
+            var exists = objContext.TryGetObjectByKey(entityKey, out foundEntity);
+
+            if (exists)
+            {
+                objContext.Detach(foundEntity);
+            }
+
+            return (exists);
         }
 
     }
