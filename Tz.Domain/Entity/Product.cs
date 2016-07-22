@@ -14,7 +14,7 @@ namespace Tz.Domain.Entity
         /// 标题
         /// </summary>
         [Required(ErrorMessage = "标题不能为空")]
-        [MaxLength(50,ErrorMessage = "长度超出限制")]
+        [MaxLength(100,ErrorMessage = "长度超出限制")]
         public string Title { get; set; }
         /// <summary>
         /// 品牌

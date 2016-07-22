@@ -16,6 +16,9 @@ namespace Tz.Domain.Entity
 
 
         #region Public Properties
+        /// <summary>
+        /// 文章标题
+        /// </summary>
         [MaxLength(50,ErrorMessage = "长度超出限制")]
         [Required(ErrorMessage = "标题不能为空")]
         public string Title { get; set; }
