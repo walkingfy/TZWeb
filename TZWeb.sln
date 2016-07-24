@@ -39,11 +39,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tz.Core.Tools", "Tz.Core.To
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tz.DataObjects", "Tz.DataObjects\Tz.DataObjects.csproj", "{6646BFEC-39C8-4568-8543-91C987D17C0A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{35669C6D-45F7-4737-BF1D-CCCD5E7F4478}"
-	ProjectSection(SolutionItems) = preProject
-		C:\Users\FengYan\Desktop\TzDataBase.sql = C:\Users\FengYan\Desktop\TzDataBase.sql
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
