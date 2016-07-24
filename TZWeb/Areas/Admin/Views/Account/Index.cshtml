@@ -11,7 +11,7 @@
             </button>
             <button class="btn btn-warning" type="button" flag="delete">
                 <i class="ace-icon fa fa-trash-o bigger-120"></i>
-                删除
+                禁用
             </button>
             <button class="btn btn-success" type="button" flag="resetpwd">
                 <i class="ace-icon fa fa-rotate-left bigger-120"></i>
@@ -60,7 +60,13 @@
                     }
                 }
             ],
-            caption: "用户列表"
+            caption: "用户列表",
+            loadComplete : function(result){
+                xcore.showOperationMsg(result, "notify");
+            },
+            loadError : function(result) {
+                xcore.showOperationMsg(result, "notify");
+            }
         });
 
         function setSelect(dialog, callback) {
@@ -85,6 +91,7 @@
 
         $("#toolbar button").bind('click', function () {
             var btn = $(this).attr("flag");
+            var options = {};
             switch (btn) {
                 case "create":
                     xcore.showEditHtml({
@@ -126,19 +133,24 @@
                     }
                     break;
                 case "delete":
-                    xcore.showDelete(jqGrid);
+                    options.url = "/Admin/Account/Disable";
+                    xcore.showDelete(jqGrid, options);
                     break;
                 case "realdelete":
-                    xcore.showRealDelete(jqGrid);
+                    options.url = "/Admin/Account/Derlete";
+                    xcore.showRealDelete(jqGrid, options);
                     break;
                 case "resetpwd":
                     var rowData = xcore.GetSelectJqGridRow(jqGrid);
-                    xcore.showConfirm("确定要重置密码吗？", function () {
-                        xcore.ajax("ResetPassword", rowData, function (result) {
-                            xcore.showOperationMsg(result, "notify");
-                            xcore.JqGridReLoad(jqGrid);
+                    if(rowData != null)
+                    {
+                        xcore.showConfirm("确定要重置密码吗？", function () {
+                            xcore.ajax("/Admin/Account/ResetPassword", rowData, function (result) {
+                                xcore.showOperationMsg(result, "notify");
+                                xcore.JqGridReLoad(jqGrid);
+                            });
                         });
-                    });
+                    }
                     break;
             }
         });

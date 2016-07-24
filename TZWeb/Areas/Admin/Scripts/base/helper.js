@@ -506,6 +506,7 @@
                 ExpandColumn: options.ExpandColumn,
                 multiselect: options.multiselect,
                 loadComplete: options.loadComplete,
+                loadError: options.loadError,
                 caption: options.caption
             });
             return jGrid;

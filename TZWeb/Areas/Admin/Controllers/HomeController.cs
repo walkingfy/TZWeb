@@ -28,10 +28,17 @@ namespace TzWeb.Areas.Admin.Controllers
         }
 
         [Description("主页(登出)")]
+        [ViewPage]
         public ActionResult LogOut()
         {
             CurrentUserHelper.ClearUserInfo();
             return Redirect("Login");
+        }
+        [Description("错误页")]
+        [ViewPage]
+        public ActionResult Error()
+        {
+            return View();
         }
         [Description("【主页】获取用户菜单")]
         [LoginAllowView]

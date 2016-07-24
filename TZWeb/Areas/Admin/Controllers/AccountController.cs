@@ -79,6 +79,17 @@ namespace TzWeb.Areas.Admin.Controllers
             }
             return this.Json(result);
         }
+        [Description("停用账户")]
+        public JsonResult Disable(AccountDataObject entity)
+        {
+            var result = base.GetModelValidate(entity);
+            if (result == null)
+            {
+                var service = new AccountAppService();
+                return this.Json(service.DisableAccount(entity));
+            }
+            return this.Json(result);
+        }
 
         [Description("删除用户")]
         public JsonResult Delete(AccountDataObject entity)

@@ -9,6 +9,7 @@ using Tz.DataObjects;
 using Tz.Domain.Entity;
 using Tz.Domain.Repositories.IRepositories;
 using Tz.Domain.Services;
+using Tz.Domain.ValueObject;
 
 namespace Tz.Application
 {
@@ -54,6 +55,7 @@ namespace Tz.Application
                 {
                     var domainObject =
                         ObjectMapperManager.DefaultInstance.GetMapper<Account, AccountDataObject>().Map(result);
+                    domainObject.RoleIds = _accountRolesService.GetAccountRole(result.Id).Select(t => t.RoleId).ToList();
                     return new OperationResult(OperationResultType.Success, "登录成功", domainObject);
                 }
                 else
@@ -100,6 +102,15 @@ namespace Tz.Application
         {
             var account = OperationBaseService.ProcessMapper<AccountDataObject, Account>(entity, OperationType.Update);
             _accountRolesService.ModifyAccountRole(account, entity.RoleIds);
+            return OperationAccount(entity, OperationType.Update);
+        }
+        /// <summary>
+        /// 禁用账户
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public OperationResult DisableAccount(AccountDataObject entity)
+        {
             return OperationAccount(entity, OperationType.Update);
         }
         /// <summary>

@@ -25,7 +25,7 @@ namespace Tz.Repositories
             finally
             {
                 localCtx.Value.Set<TAggregateRoot>().Remove(obj);
-                Commited = true;
+                Commited = false;
             }
         }
 

@@ -11,7 +11,7 @@
             </button>
             <button class="btn btn-warning" type="button" flag="delete">
                 <i class="ace-icon fa fa-trash-o bigger-120"></i>
-                删除
+                禁用
             </button>
             <button class="btn btn-danger" type="button" flag="realdelete">
                 <i class="ace-icon fa fa-remove bigger-120"></i>
@@ -56,6 +56,7 @@
 
         $("#toolbar button").bind('click', function () {
             var btn = $(this).attr("flag");
+            var options = {};
             switch (btn) {
                 case "create":
                     xcore.showEditHtml({
@@ -76,10 +77,12 @@
                     xcore.showUpdatePage(jqGrid);
                     break;
                 case "delete":
-                    xcore.showDelete(jqGrid);
+                    options.url = "/Admin/Role/Update";
+                    xcore.showDelete(jqGrid, options);
                     break;
                 case "realdelete":
-                    xcore.showRealDelete(jqGrid);
+                    options.url = "/Admin/Role/Delete";
+                    xcore.showRealDelete(jqGrid, options);
                     break;
             }
         });

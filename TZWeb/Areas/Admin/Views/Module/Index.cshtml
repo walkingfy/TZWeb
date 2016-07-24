@@ -16,7 +16,7 @@
             </button>
             <button class="btn btn-warning" type="button" flag="delete">
                 <i class="ace-icon fa fa-trash-o bigger-120"></i>
-                删除
+                禁用
             </button>
             <button class="btn btn-danger" type="button" flag="realdelete">
                 <i class="ace-icon fa fa-remove bigger-120"></i>
@@ -27,6 +27,9 @@
     <table id="grid-table"></table>
     <div id="grid-pager"></div>
 </div>
+@* ReSharper disable once UsageOfPossiblyUnassignedValue *@
+@* ReSharper disable once QualifiedExpressionIsNull *@
+@* ReSharper disable once UsageOfPossiblyUnassignedValue *@
 <script type="text/javascript">
     $("#ModuleBody").ready(function () {
         var gridSelector = "#grid-table";
@@ -38,7 +41,7 @@
             url: "/Admin/Module/GetGridData",
             colNames: ['Id', 'ParentId', 'Controller', 'Action', '名称', '类型', '图标', '链接地址', '排序值', '备注', '是否有效'],
             colModel: [
-                { name: 'Id', width: 1, hidden: true },
+                { name: 'Id', width: 1, hidden: true, key:true },
                 { name: 'ParentId', width: 1, hidden: true },
                 { name: 'Controller', width: 1, hidden: true },
                 { name: 'Action', width: 1, hidden: true },
@@ -116,6 +119,7 @@
 
         $("#toolbar button").bind('click', function () {
             var btn = $(this).attr("flag");
+            var options = {};
             switch (btn) {
                 case "create":
                     var parentId = "";
@@ -162,10 +166,12 @@
                     }
                     break;
                 case "delete":
-                    xcore.showDelete(jqGrid);
+                    options.url = "/Admin/Module/Update";
+                    xcore.showDelete(jqGrid,options);
                     break;
                 case "realdelete":
-                    xcore.showRealDelete(jqGrid);
+                    options.url = "/Admin/Module/Delete";
+                    xcore.showRealDelete(jqGrid,options);
                     break;
             }
         });

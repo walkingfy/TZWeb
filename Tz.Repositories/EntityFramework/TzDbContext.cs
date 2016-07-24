@@ -57,7 +57,7 @@ namespace Tz.Repositories.EntityFramework
         {
             get { return Set<RolePermission>(); }
         }
-        /// <summary>
+        /*/// <summary>
         /// 文章
         /// </summary>
         public DbSet<Article> Articles
@@ -98,7 +98,7 @@ namespace Tz.Repositories.EntityFramework
         public DbSet<ExtendField> ExtendFields
         {
             get { return Set<ExtendField>(); }
-        } 
+        } */
         #endregion
 
         #region Protected Methods
@@ -110,13 +110,13 @@ namespace Tz.Repositories.EntityFramework
                 .Add(new RoleTypeConfiguration())
                 .Add(new ModuleTypeConfiguration())
                 .Add(new AccountRoleTypeConfiguration())
-                .Add(new RolePermissionTypeConfiguration())
-                .Add(new ArticleTypeConfiguration())
+                .Add(new RolePermissionTypeConfiguration());
+                /*.Add(new ArticleTypeConfiguration())
                 .Add(new ArticleCategoryTypeConfiguration())
                 .Add(new ProductTypeConfiguration())
                 .Add(new ProductCategoryTypeConfiguration())
                 .Add(new ImageFileTypeCpnfiguration())
-                .Add(new ExtendFieldTypeConfiguration());
+                .Add(new ExtendFieldTypeConfiguration());*/
             base.OnModelCreating(modelBuilder);
         }
         #endregion
