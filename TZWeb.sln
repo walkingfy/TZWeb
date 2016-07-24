@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TzWeb", "TZWeb\TzWeb.csproj", "{D95A1606-970E-43D5-8540-3021DE5F7E37}"
 EndProject
@@ -38,6 +38,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tz.Core.Tools", "Tz.Core.Tools\Tz.Core.Tools.csproj", "{97E1E245-D876-442F-A58E-BFC8AA6FAE0D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tz.DataObjects", "Tz.DataObjects\Tz.DataObjects.csproj", "{6646BFEC-39C8-4568-8543-91C987D17C0A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{35669C6D-45F7-4737-BF1D-CCCD5E7F4478}"
+	ProjectSection(SolutionItems) = preProject
+		C:\Users\FengYan\Desktop\TzDataBase.sql = C:\Users\FengYan\Desktop\TzDataBase.sql
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
