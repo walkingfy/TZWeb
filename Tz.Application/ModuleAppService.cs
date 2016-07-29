@@ -47,14 +47,14 @@ namespace Tz.Application
                 {
                     //修改父级节点值
                     data.Remove(parent);
-                    parent.expanded = true;
+                    parent.expanded = !parent.ParentId.HasValue;
                     parent.isLeaf = false;
                     parent.loaded = true;
                     data.Add(parent);
                     //计算上级的Level
                     module.level = parent.level + 1;
                     module.parent = module.ParentId.Value.ToString();
-                    module.expanded = true;
+                    module.expanded = false;
                     module.isLeaf = true;
                     module.loaded = true;
                     data.Add(module);

@@ -40,7 +40,7 @@ namespace TzWeb.Areas.Admin.Controllers
                 else
                 {
                     filterContext.Result = new JsonResult { Data = new OperationResult(OperationResultType.Error, "您没有权限执行此操作！") };
-                    //filterContext.RequestContext.HttpContext.Response.Redirect("~/Admin/Home/Error");
+                    filterContext.RequestContext.HttpContext.Response.Redirect("~/Admin/Home/Error");
                 }
             }
         }

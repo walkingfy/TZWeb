@@ -18,6 +18,7 @@ namespace TzWeb.Areas.Admin.Controllers
             return View();
         }
         [Description("获取角色对应权限")]
+        [LoginAllowView]
         public JsonResult GetRolePermissionsById(Guid? roleId)
         {
             var service = new RolePermissionAppService();

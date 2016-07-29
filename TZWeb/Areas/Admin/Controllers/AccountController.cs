@@ -98,6 +98,7 @@ namespace TzWeb.Areas.Admin.Controllers
             return this.Json(service.DeleteAccount(entity));
         }
         [Description("检查账号是否存在")]
+        [LoginAllowView]
         public JsonResult CheckAccountIsExists(AccountDataObject entity)
         {
             var service = new AccountAppService();
@@ -112,6 +113,7 @@ namespace TzWeb.Areas.Admin.Controllers
             return this.Json(service.ResetPassword(entity));
         }
         [Description("获取账号角色")]
+        [LoginAllowView]
         public JsonResult GetAccountRole(Guid? accountGuid)
         {
             var service = new AccountAppService();

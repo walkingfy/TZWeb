@@ -28,7 +28,6 @@ namespace TzWeb.Areas.Admin.Controllers
         }
 
         [Description("主页(登出)")]
-        [ViewPage]
         public ActionResult LogOut()
         {
             CurrentUserHelper.ClearUserInfo();

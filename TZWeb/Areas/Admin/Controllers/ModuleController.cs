@@ -83,6 +83,7 @@ namespace TzWeb.Areas.Admin.Controllers
             return View();
         }
         [Description("获取所有控制器")]
+
         public JsonResult GetAllController()
         {
             IList<MVCControllerDataObject> allController;
