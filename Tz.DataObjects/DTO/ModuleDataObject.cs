@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Tz.DataObjects
 {
     public class ModuleDataObject:DataObjectBase
     {
+        [Required(ErrorMessage = "请输入模块名称")]
         public string Name { get; set; }
 
         public string Icon { get; set; }
@@ -17,6 +19,7 @@ namespace Tz.DataObjects
         public string LinkAddress { get; set; }
 
         public string Remark { get; set; }
+        [Required(ErrorMessage = "请选择模块类型")]
         public int Type { get; set; }
         public int? Sort { get; set; }
 

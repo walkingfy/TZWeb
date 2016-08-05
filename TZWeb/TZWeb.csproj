@@ -760,6 +760,7 @@
     <Folder Include="Areas\Admin\Content\Css\" />
     <Folder Include="Areas\Admin\Content\iCheck\" />
     <Folder Include="Areas\Admin\Content\magicsuggest\" />
+    <Folder Include="Areas\Admin\Content\Ueditor\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\Base\" />
     <Folder Include="Models\" />

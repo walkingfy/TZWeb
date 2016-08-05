@@ -45,6 +45,7 @@
     <Compile Include="DataObjectBase.cs" />
     <Compile Include="DTO\AccountDataObject.cs" />
     <Compile Include="DTO\AccountRolesDataObject.cs" />
+    <Compile Include="DTO\ArticleDataObject.cs" />
     <Compile Include="DTO\ModuleDataObject.cs" />
     <Compile Include="DTO\MVCActionDataObject.cs" />
     <Compile Include="DTO\MVCControllerDataObject.cs" />
