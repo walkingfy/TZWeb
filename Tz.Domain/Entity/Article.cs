@@ -38,7 +38,9 @@ namespace Tz.Domain.Entity
         /// 阅读次数
         /// </summary>
         public int Counter { get; set; }
-
+        /// <summary>
+        /// 文章类别
+        /// </summary>
         public Guid ArticleCategoryId { get; set; }
         /// <summary>
         /// 文章内容

@@ -11,33 +11,33 @@ namespace Tz.Repositories
     {
         private readonly ThreadLocal<TzDbContext> localCtx = new ThreadLocal<TzDbContext>(() => new TzDbContext());
 
-        public override void RegisterDeleted<TAggregateRoot>(TAggregateRoot obj)
+        public override void RegisterDeleted<T>(T obj)
         {
             try
             {
                 //判断状态是否分离，分离则附加
-                if (localCtx.Value.Entry<TAggregateRoot>(obj).State == EntityState.Detached)
-                    localCtx.Value.Set<TAggregateRoot>().Attach(obj);
+                if (localCtx.Value.Entry<T>(obj).State == EntityState.Detached)
+                    localCtx.Value.Set<T>().Attach(obj);
             }
             catch (Exception)
             {
             }
             finally
             {
-                localCtx.Value.Set<TAggregateRoot>().Remove(obj);
+                localCtx.Value.Set<T>().Remove(obj);
                 Commited = false;
             }
         }
 
-        public override void RegisterModified<TAggregateRoot>(TAggregateRoot obj)
+        public override void RegisterModified<T>(T obj)
         {
-            localCtx.Value.Entry<TAggregateRoot>(obj).State = EntityState.Modified;
+            localCtx.Value.Entry<T>(obj).State = EntityState.Modified;
             Commited = false;
         }
 
-        public override void RegisterNew<TAggregateRoot>(TAggregateRoot obj)
+        public override void RegisterNew<T>(T obj)
         {
-            localCtx.Value.Set<TAggregateRoot>().Add(obj);
+            localCtx.Value.Set<T>().Add(obj);
             Commited = false;
         }
 

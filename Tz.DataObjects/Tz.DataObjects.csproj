@@ -45,10 +45,13 @@
     <Compile Include="DataObjectBase.cs" />
     <Compile Include="DTO\AccountDataObject.cs" />
     <Compile Include="DTO\AccountRolesDataObject.cs" />
+    <Compile Include="DTO\ArticleCategoryDataObject.cs" />
     <Compile Include="DTO\ArticleDataObject.cs" />
     <Compile Include="DTO\ModuleDataObject.cs" />
     <Compile Include="DTO\MVCActionDataObject.cs" />
     <Compile Include="DTO\MVCControllerDataObject.cs" />
+    <Compile Include="DTO\ProduceCategoryDataObject.cs" />
+    <Compile Include="DTO\ProductDataObject.cs" />
     <Compile Include="DTO\RoleDataObject.cs" />
     <Compile Include="DTO\RolePermissionDataObject.cs" />
     <Compile Include="Enums\OperationResultType.cs" />

@@ -12,8 +12,8 @@ using System.Data.Entity.Infrastructure;
 
 namespace Tz.Repositories
 {
-    public class EntityFrameworkRepository<TAggregateRoot>:Repository<TAggregateRoot>
-        where TAggregateRoot: class ,IAggregateRoot
+    public class EntityFrameworkRepository<T>:Repository<T>
+        where T: class ,IAggregateRoot
 
     {
         private readonly IEntityFrameworkRepositoryContext efContext;
@@ -53,7 +53,7 @@ namespace Tz.Repositories
             return memberExpr;
         }
 
-        private string GetEagerLoadingPath(Expression<Func<TAggregateRoot, dynamic>> eagerLoadingProperty)
+        private string GetEagerLoadingPath(Expression<Func<T, dynamic>> eagerLoadingProperty)
         {
             MemberExpression memberExpression = this.GetMemberInfo(eagerLoadingProperty);
             var parameterName = eagerLoadingProperty.Parameters.First().Name;
@@ -67,18 +67,18 @@ namespace Tz.Repositories
             get { return this.efContext; }
         }
 
-        protected override void DoAdd(TAggregateRoot aggregateRoot)
+        protected override void DoAdd(T aggregateRoot)
         {
-            efContext.RegisterNew<TAggregateRoot>(aggregateRoot);
+            efContext.RegisterNew<T>(aggregateRoot);
         }
 
-        protected override TAggregateRoot DoGetByKey(Guid key)
+        protected override T DoGetByKey(Guid key)
         {
-            return efContext.Context.Set<TAggregateRoot>().Where(p => p.Id == key).First();
+            return efContext.Context.Set<T>().Where(p => p.Id == key).First();
         }
 
-        protected override IEnumerable<TAggregateRoot> DoGetAll(ISpecification<TAggregateRoot> specification,
-            Expression<Func<TAggregateRoot, dynamic>> sortPredicate, SortOrder sortOrder)
+        protected override IEnumerable<T> DoGetAll(ISpecification<T> specification,
+            Expression<Func<T, dynamic>> sortPredicate, SortOrder sortOrder)
         {
             var results = this.DoFindAll(specification, sortPredicate, sortOrder);
             if (results == null)//|| results.Count() == 0
@@ -88,21 +88,21 @@ namespace Tz.Repositories
             return results;
         }
 
-        protected override PagedResult<TAggregateRoot> DoGetAll(ISpecification<TAggregateRoot> specification,
-            Expression<Func<TAggregateRoot, dynamic>> sortPredicate, SortOrder sortOrder, int pageNumber, int pageSize)
+        protected override PagedResult<T> DoGetAll(ISpecification<T> specification,
+            Expression<Func<T, dynamic>> sortPredicate, SortOrder sortOrder, int pageNumber, int pageSize)
         {
             var results = this.DoFindAll(specification, sortPredicate, sortOrder, pageNumber, pageSize);
-            if (results == null || results == PagedResult<TAggregateRoot>.Empty)
+            if (results == null || results == PagedResult<T>.Empty)
             {
                 throw new ArgumentException("无法根据指定的查询条件找到所需要的聚合根");
             }
             return results;
         }
 
-        protected override IEnumerable<TAggregateRoot> DoFindAll(ISpecification<TAggregateRoot> specification,
-            Expression<Func<TAggregateRoot, dynamic>> sortPredicate, SortOrder sortOrder)
+        protected override IEnumerable<T> DoFindAll(ISpecification<T> specification,
+            Expression<Func<T, dynamic>> sortPredicate, SortOrder sortOrder)
         {
-            var query = efContext.Context.Set<TAggregateRoot>().AsNoTracking()
+            var query = efContext.Context.Set<T>().AsNoTracking()
                 .Where(specification.GetExpression());
             if (sortPredicate != null)
             {
@@ -119,8 +119,8 @@ namespace Tz.Repositories
             return query.ToList();
         }
 
-        protected override PagedResult<TAggregateRoot> DoFindAll(ISpecification<TAggregateRoot> specification,
-            Expression<Func<TAggregateRoot, dynamic>> sortPredicate, SortOrder sortOrder, int pageNumber, int pageSize)
+        protected override PagedResult<T> DoFindAll(ISpecification<T> specification,
+            Expression<Func<T, dynamic>> sortPredicate, SortOrder sortOrder, int pageNumber, int pageSize)
         {
             if (pageNumber <= 0)
             {
@@ -130,7 +130,7 @@ namespace Tz.Repositories
             {
                 throw new ArgumentOutOfRangeException("pageSize",pageSize,"每页大小必须大于等于1。");
             }
-            var query = efContext.Context.Set<TAggregateRoot>().AsNoTracking()
+            var query = efContext.Context.Set<T>().AsNoTracking()
                 .Where(specification.GetExpression());
             int skip = (pageNumber - 1)*pageSize;
             int take = pageSize;
@@ -149,7 +149,7 @@ namespace Tz.Repositories
                         {
                             return null;
                         }
-                        return new PagedResult<TAggregateRoot>(pagedGroupAscending.Key.Total,
+                        return new PagedResult<T>(pagedGroupAscending.Key.Total,
                             (pagedGroupAscending.Key.Total + pageSize - 1)/pageSize, pageSize, pageNumber,
                             pagedGroupAscending.Select(p => p).ToList());
                     case SortOrder.Descending:
@@ -163,7 +163,7 @@ namespace Tz.Repositories
                         {
                             return null;
                         }
-                        return new PagedResult<TAggregateRoot>(pageGroupDescending.Key.Total,
+                        return new PagedResult<T>(pageGroupDescending.Key.Total,
                             (pageGroupDescending.Key.Total + pageSize - 1)/pageSize, pageSize, pageNumber,
                             pageGroupDescending.Select(p => p).ToList());
                     default:
@@ -173,9 +173,9 @@ namespace Tz.Repositories
             throw new InvalidOperationException("基于分页功能的查询必须指定排序字段和排序顺序。");
         }
 
-        protected override TAggregateRoot DoGet(ISpecification<TAggregateRoot> specification)
+        protected override T DoGet(ISpecification<T> specification)
         {
-            TAggregateRoot result = this.DoFind(specification);
+            T result = this.DoFind(specification);
             if (result == null)
             {
                 throw new ArgumentException("无法根据指定的查询条件找到所需要的聚合根。");
@@ -183,33 +183,33 @@ namespace Tz.Repositories
             return result;
         }
 
-        protected override TAggregateRoot DoFind(ISpecification<TAggregateRoot> specification)
+        protected override T DoFind(ISpecification<T> specification)
         {
-            return efContext.Context.Set<TAggregateRoot>().Where(specification.IsSatisfiedBy).FirstOrDefault();
+            return efContext.Context.Set<T>().Where(specification.IsSatisfiedBy).FirstOrDefault();
         }
 
-        protected override bool DoExists(ISpecification<TAggregateRoot> specification)
+        protected override bool DoExists(ISpecification<T> specification)
         {
-            var count = efContext.Context.Set<TAggregateRoot>().Count(specification.IsSatisfiedBy);
+            var count = efContext.Context.Set<T>().Count(specification.IsSatisfiedBy);
             return count != 0;
         }
 
-        protected override void DoRemove(TAggregateRoot aggregateRoot)
+        protected override void DoRemove(T aggregateRoot)
         {
             RemoveHoldingEntityInContext(aggregateRoot);
-            efContext.RegisterDeleted<TAggregateRoot>(aggregateRoot);
+            efContext.RegisterDeleted<T>(aggregateRoot);
         }
 
-        protected override void DoUpdate(TAggregateRoot aggregateRoot)
+        protected override void DoUpdate(T aggregateRoot)
         {
             RemoveHoldingEntityInContext(aggregateRoot);
-            efContext.RegisterModified<TAggregateRoot>(aggregateRoot);
+            efContext.RegisterModified<T>(aggregateRoot);
         }
 
-        protected override TAggregateRoot DoFind(ISpecification<TAggregateRoot> specification,
-            params Expression<Func<TAggregateRoot, dynamic>>[] eagerLoadingProperties)
+        protected override T DoFind(ISpecification<T> specification,
+            params Expression<Func<T, dynamic>>[] eagerLoadingProperties)
         {
-            var dbset = efContext.Context.Set<TAggregateRoot>();
+            var dbset = efContext.Context.Set<T>();
             if (eagerLoadingProperties != null && eagerLoadingProperties.Length > 0)
             {
                 var eagerLoadingProperty = eagerLoadingProperties[0];
@@ -230,9 +230,9 @@ namespace Tz.Repositories
 
         }
 
-        protected override IEnumerable<TAggregateRoot> DoGetAll(ISpecification<TAggregateRoot> specification,
-            Expression<Func<TAggregateRoot, dynamic>> sortPredicate, SortOrder sortOrder,
-            params Expression<Func<TAggregateRoot, dynamic>>[] eagerLoadingProperties)
+        protected override IEnumerable<T> DoGetAll(ISpecification<T> specification,
+            Expression<Func<T, dynamic>> sortPredicate, SortOrder sortOrder,
+            params Expression<Func<T, dynamic>>[] eagerLoadingProperties)
         {
             var results = this.DoFindAll(specification, sortPredicate, sortOrder, eagerLoadingProperties);
             if (results == null || results.Any())
@@ -242,9 +242,9 @@ namespace Tz.Repositories
             return results;
         }
 
-        protected override PagedResult<TAggregateRoot> DoGetAll(ISpecification<TAggregateRoot> specification,
-            Expression<Func<TAggregateRoot, dynamic>> sortPredicate, SortOrder sortOrder, int pageNumber, int pageSize,
-            params Expression<Func<TAggregateRoot, dynamic>>[] eagerLoadingProPerties)
+        protected override PagedResult<T> DoGetAll(ISpecification<T> specification,
+            Expression<Func<T, dynamic>> sortPredicate, SortOrder sortOrder, int pageNumber, int pageSize,
+            params Expression<Func<T, dynamic>>[] eagerLoadingProPerties)
         {
             var results = this.DoFindAll(specification, sortPredicate, sortOrder, pageNumber, pageSize,
                 eagerLoadingProPerties);
@@ -255,12 +255,12 @@ namespace Tz.Repositories
             return results;
         }
 
-        protected override IEnumerable<TAggregateRoot> DoFindAll(ISpecification<TAggregateRoot> specification,
-            Expression<Func<TAggregateRoot, dynamic>> sortPredicate, SortOrder sortOrder,
-            params Expression<Func<TAggregateRoot, dynamic>>[] eagerLoadingProperties)
+        protected override IEnumerable<T> DoFindAll(ISpecification<T> specification,
+            Expression<Func<T, dynamic>> sortPredicate, SortOrder sortOrder,
+            params Expression<Func<T, dynamic>>[] eagerLoadingProperties)
         {
-            var dbset = efContext.Context.Set<TAggregateRoot>();
-            IQueryable<TAggregateRoot> queryable = null;
+            var dbset = efContext.Context.Set<T>();
+            IQueryable<T> queryable = null;
             if (eagerLoadingProperties != null && eagerLoadingProperties.Any())
             {
                 var eagerLoadingPreperty = eagerLoadingProperties[0];
@@ -293,9 +293,9 @@ namespace Tz.Repositories
             return queryable.ToList();
         }
 
-        protected override PagedResult<TAggregateRoot> DoFindAll(ISpecification<TAggregateRoot> specification,
-            Expression<Func<TAggregateRoot, dynamic>> sortPredicate, SortOrder sortOrder, int pageNumber,
-            int pageSize, params Expression<Func<TAggregateRoot, dynamic>>[] eagerLoadingProperties)
+        protected override PagedResult<T> DoFindAll(ISpecification<T> specification,
+            Expression<Func<T, dynamic>> sortPredicate, SortOrder sortOrder, int pageNumber,
+            int pageSize, params Expression<Func<T, dynamic>>[] eagerLoadingProperties)
         {
             if (pageNumber <= 0)
             {
@@ -308,8 +308,8 @@ namespace Tz.Repositories
             int skip = (pageNumber - 1)*pageSize;
             int take = pageSize;
 
-            var dbset = efContext.Context.Set<TAggregateRoot>();
-            IQueryable<TAggregateRoot> queryable = null;
+            var dbset = efContext.Context.Set<T>();
+            IQueryable<T> queryable = null;
             if (eagerLoadingProperties !=null && eagerLoadingProperties.Length > 0)
             {
                 var eagerLoadingProperty = eagerLoadingProperties[0];
@@ -335,12 +335,12 @@ namespace Tz.Repositories
                         var pagedGroupAscending = queryable.SortBy(sortPredicate).Skip(skip).Take(take).GroupBy(p => new { Total = queryable.Count() }).FirstOrDefault();
                         if (pagedGroupAscending == null)
                             return null;
-                        return new PagedResult<TAggregateRoot>(pagedGroupAscending.Key.Total, (pagedGroupAscending.Key.Total + pageSize - 1) / pageSize, pageSize, pageNumber, pagedGroupAscending.Select(p => p).ToList());
+                        return new PagedResult<T>(pagedGroupAscending.Key.Total, (pagedGroupAscending.Key.Total + pageSize - 1) / pageSize, pageSize, pageNumber, pagedGroupAscending.Select(p => p).ToList());
                     case SortOrder.Descending:
                         var pagedGroupDescending = queryable.SortByDescending(sortPredicate).Skip(skip).Take(take).GroupBy(p => new { Total = queryable.Count() }).FirstOrDefault();
                         if (pagedGroupDescending == null)
                             return null;
-                        return new PagedResult<TAggregateRoot>(pagedGroupDescending.Key.Total, (pagedGroupDescending.Key.Total + pageSize - 1) / pageSize, pageSize, pageNumber, pagedGroupDescending.Select(p => p).ToList());
+                        return new PagedResult<T>(pagedGroupDescending.Key.Total, (pagedGroupDescending.Key.Total + pageSize - 1) / pageSize, pageSize, pageNumber, pagedGroupDescending.Select(p => p).ToList());
                     default:
                         break;
                 }
@@ -348,18 +348,18 @@ namespace Tz.Repositories
             throw new InvalidOperationException("基于分页功能的查询必须指定排序字段和排序顺序。");
         }
 
-        protected override TAggregateRoot DoGet(ISpecification<TAggregateRoot> specification, params Expression<Func<TAggregateRoot, dynamic>>[] eagerLoadingProperties)
+        protected override T DoGet(ISpecification<T> specification, params Expression<Func<T, dynamic>>[] eagerLoadingProperties)
         {
-            TAggregateRoot result = this.DoFind(specification, eagerLoadingProperties);
+            T result = this.DoFind(specification, eagerLoadingProperties);
             if (result == null)
                 throw new ArgumentException("无法根据指定的查询条件找到所需的聚合根。");
             return result;
         }
 
-        private Boolean RemoveHoldingEntityInContext(TAggregateRoot entity)
+        private Boolean RemoveHoldingEntityInContext(T entity)
         {
             var objContext = ((IObjectContextAdapter)efContext.Context).ObjectContext;
-            var objSet = objContext.CreateObjectSet<TAggregateRoot>();
+            var objSet = objContext.CreateObjectSet<T>();
             var entityKey = objContext.CreateEntityKey(objSet.EntitySet.Name, entity);
 
             Object foundEntity;
