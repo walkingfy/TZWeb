@@ -9,35 +9,35 @@ namespace Tz.Repositories
 {
     public class EntityFrameworkRepositoryContext : RepositoryContext, IEntityFrameworkRepositoryContext
     {
-        private readonly ThreadLocal<TzDbContext> localCtx = new ThreadLocal<TzDbContext>(() => new TzDbContext());
+        private readonly ThreadLocal<TzDbContext> _localCtx = new ThreadLocal<TzDbContext>(() => new TzDbContext());
 
         public override void RegisterDeleted<T>(T obj)
         {
             try
             {
                 //判断状态是否分离，分离则附加
-                if (localCtx.Value.Entry<T>(obj).State == EntityState.Detached)
-                    localCtx.Value.Set<T>().Attach(obj);
+                if (_localCtx.Value.Entry<T>(obj).State == EntityState.Detached)
+                    _localCtx.Value.Set<T>().Attach(obj);
             }
             catch (Exception)
             {
             }
             finally
             {
-                localCtx.Value.Set<T>().Remove(obj);
+                _localCtx.Value.Set<T>().Remove(obj);
                 Commited = false;
             }
         }
 
         public override void RegisterModified<T>(T obj)
         {
-            localCtx.Value.Entry<T>(obj).State = EntityState.Modified;
+            _localCtx.Value.Entry<T>(obj).State = EntityState.Modified;
             Commited = false;
         }
 
         public override void RegisterNew<T>(T obj)
         {
-            localCtx.Value.Set<T>().Add(obj);
+            _localCtx.Value.Set<T>().Add(obj);
             Commited = false;
         }
 
@@ -45,8 +45,8 @@ namespace Tz.Repositories
         {
             if (!Commited)
             {
-                var validationErrors = localCtx.Value.GetValidationErrors();
-                var count = localCtx.Value.SaveChanges();
+                var validationErrors = _localCtx.Value.GetValidationErrors();
+                var count = _localCtx.Value.SaveChanges();
                 Commited = true;
                 return count;
             }
@@ -67,18 +67,16 @@ namespace Tz.Repositories
                 {
                     Commit();
                 }
-                localCtx.Value.Dispose();
-                localCtx.Dispose();
+                _localCtx.Value.Dispose();
+                _localCtx.Dispose();
                 base.Dispose(disposing);
             }
         }
 
         #region IEntityFramworkRepositoryContext Members
 
-        public DbContext Context
-        {
-            get { return localCtx.Value; }
-        }
+        public DbContext Context => _localCtx.Value;
+
         #endregion
 
     }

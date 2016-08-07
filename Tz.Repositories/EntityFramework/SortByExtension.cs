@@ -40,9 +40,8 @@ namespace Tz.Repositories.EntityFramework
             where T : class, IAggregateRoot
         {
             var param = sortPerdicate.Parameters[0];
-            string propertyName = null;
-            Type propertyType = null;
-            Expression bodyExpression = null;
+            Type propertyType;
+            Expression bodyExpression;
             if (sortPerdicate.Body is UnaryExpression)
             {
                 UnaryExpression unaryExpression=sortPerdicate.Body as UnaryExpression;
@@ -58,7 +57,7 @@ namespace Tz.Repositories.EntityFramework
                 either UnaryExpression or MemberExpression.", "sortPredicate");
             }
             MemberExpression memberExpression = (MemberExpression) bodyExpression;
-            propertyName = memberExpression.Member.Name;
+            var propertyName = memberExpression.Member.Name;
             if (memberExpression.Member.MemberType == MemberTypes.Property)
             {
                 PropertyInfo propertyInfo = memberExpression.Member as PropertyInfo;
@@ -75,9 +74,8 @@ namespace Tz.Repositories.EntityFramework
 
             var sortingMethods = typeof(Queryable).GetMethods(BindingFlags.Public | BindingFlags.Static);
             var sortingMethodName = GetSortingMethodName(sortOrder);
-            var sortingMethod = sortingMethods.Where(sm => sm.Name == sortingMethodName &&
-                sm.GetParameters() != null &&
-                sm.GetParameters().Length == 2).First();
+            var sortingMethod = sortingMethods.First(sm => sm.Name == sortingMethodName &&
+                sm.GetParameters().Length == 2);
             return (IOrderedQueryable<T>)sortingMethod
                 .MakeGenericMethod(typeof(T), propertyType)
                 .Invoke(null, new object[] { query, convertedExpression });
@@ -92,7 +90,7 @@ namespace Tz.Repositories.EntityFramework
                     return "OrderByDescending";
                 default:
                     throw new ArgumentException("Sort Order must be specified as either Ascending or Descending.",
-            "sortOrder");
+            nameof(sortOrder));
             }
         }
         #endregion

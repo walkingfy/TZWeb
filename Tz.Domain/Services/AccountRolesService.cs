@@ -16,8 +16,8 @@ namespace Tz.Domain.Services
 
         public AccountRolesService(IRepositoryContext repositoryContext, IAccountRoleRepository repository)
         {
-            this._repositoryContext = repositoryContext;
-            this._accountRoleRepository = repository;
+            _repositoryContext = repositoryContext;
+            _accountRoleRepository = repository;
         }
         /// <summary>
         /// 修改账户角色

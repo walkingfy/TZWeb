@@ -22,8 +22,7 @@ namespace Tz.Repositories
         public void RemoveAllRoleByAccount(Account account)
         {
             if (account == null) throw new CustomException("account不能为空","0500",LogLevel.Warning);
-            string sql = string.Format("Delete from {0} where AccountId = @AccountId",
-                EnumTableName.UserRoles.ToString());
+            string sql = $"Delete from {EnumTableName.UserRoles.ToString()} where AccountId = @AccountId";
             var param = new object[] {new SqlParameter("@AccountId", account.Id),};
             EFContext.Context.Database.ExecuteSqlCommand(sql, param);
         }

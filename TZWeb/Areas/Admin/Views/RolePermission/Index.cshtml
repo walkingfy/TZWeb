@@ -77,15 +77,19 @@
                 if (select && select.id) {
                     xcore.ajax("/Admin/RolePermission/GetRolePermissionsById", { roleId: select.id }, function (res) {
                         var nodes = zTree.getNodes();
+                        zTree.checkAllNodes(false);
                         $.each(res, function (key, value) {
-                            $.each(nodes, function (nodei, node) {
+                            $.each(zTree.transformToArray(nodes), function (nodei, node) {
                                 if (value == node.id)
-                                    zTree.checkNode(node, true, true);
+                                    zTree.checkNode(node, true, false);
+                                
                             });
                         });
                     });
                     //给JS赋值
                     roleId = select.id;
+                } else {
+                    
                 }
             });
         });
