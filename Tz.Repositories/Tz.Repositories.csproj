@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="AccountRepository.cs" />
     <Compile Include="AccountRoleRepository.cs" />
+    <Compile Include="ArticleCategoryRepository.cs" />
     <Compile Include="ArticleRepository.cs" />
     <Compile Include="EntityFramework\EntityFrameworkRepository.cs" />
     <Compile Include="EntityFramework\EntityFrameworkRepositoryContext.cs" />
