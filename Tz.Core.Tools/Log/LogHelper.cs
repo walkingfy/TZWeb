@@ -39,7 +39,7 @@ namespace Tz.Core.Tools
         /// <param name="se"></param>
         public static void WriteLog(string error, Exception se)
         {
-            if (Loginfo.IsErrorEnabled)
+            if (Logerror.IsErrorEnabled)
             {
                 Logerror.Error(error, se);
             }

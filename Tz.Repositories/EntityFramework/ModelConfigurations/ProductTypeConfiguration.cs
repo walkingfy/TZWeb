@@ -4,14 +4,14 @@ using Tz.Domain.Entity;
 
 namespace Tz.Repositories.EntityFramework.ModelConfigurations
 {
-    public class ArticleTypeConfiguration:EntityTypeConfiguration<Article>
+    public class ProductTypeConfiguration:EntityTypeConfiguration<Product>
     {
-        public ArticleTypeConfiguration()
+        public ProductTypeConfiguration()
         {
             HasKey(t => t.Id);
             Property(t => t.Id).IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-            Property(t => t.Title).IsRequired().HasMaxLength(50);
-            ToTable("Articles");
+            Property(t => t.Title).IsRequired().HasMaxLength(100);
+            ToTable("Products");
         }
     }
 }

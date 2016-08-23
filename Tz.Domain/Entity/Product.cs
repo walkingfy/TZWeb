@@ -1,74 +1,83 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.Security.Cryptography.X509Certificates;
 using Tz.Domain.ValueObject;
 
 namespace Tz.Domain.Entity
 {
-    /// <summary>
-    /// 文章聚合根
-    /// </summary>
-    public class Article : AggregateRoot
+    public class Product:AggregateRoot
     {
-
-        public Article()
+        public Product()
         { }
-
 
         #region Public Properties
         /// <summary>
-        /// 文章标题
+        /// 标题
         /// </summary>
-        [MaxLength(50,ErrorMessage = "长度超出限制")]
         [Required(ErrorMessage = "标题不能为空")]
+        [MaxLength(100,ErrorMessage = "长度超出限制")]
         public string Title { get; set; }
         /// <summary>
-        /// 概述
+        /// 品牌
         /// </summary>
-        public string Summary { get; set; }
+        public Guid BrandCD { get; set; }
         /// <summary>
-        /// SEO关键字
+        /// 类别ID
         /// </summary>
-        public string MetaKeyWords { get; set; }
+        public Guid ProductCategoryId { get; set; }
         /// <summary>
-        /// SEO概述
+        /// 单价
         /// </summary>
-        public string MetaDescription { get; set; }
+        public double Price { get; set; }
         /// <summary>
-        /// 阅读次数
+        /// 折扣价
         /// </summary>
-        public int Counter { get; set; }
-
-        public Guid ArticleCategoryId { get; set; }
+        public double RebatePrice { get; set; }
         /// <summary>
-        /// 文章内容
+        /// 保质期
         /// </summary>
-        public string ArticleContent { get; set; }
+        public string ShelfLife { get; set; }
+        /// <summary>
+        /// 内容
+        /// </summary>
+        public string ProductContent { get; set; }
         /// <summary>
         /// 描述
         /// </summary>
-        [MaxLength(200,ErrorMessage = "长度超出限制")]
         public string Description { get; set; }
         /// <summary>
-        /// 创建者名称
+        /// SEO标题
         /// </summary>
-        public string CreateName { get; set; }
+        public string SEOTitle { get; set; }
+        /// <summary>
+        /// SEO关键字
+        /// </summary>
+        public string SEOKeyWord { get; set; }
+        /// <summary>
+        /// SEO描述
+        /// </summary>
+        public string SEODescription { get; set; }
+        /// <summary>
+        /// 来源
+        /// </summary>
+        public string SourceFrom { get; set; }
         /// <summary>
         /// 是否可见
         /// </summary>
         public EnumIsVisible IsVisible { get; set; }
         #endregion
 
-        #region Public Methods
+        #region Public Method
+
         /// <summary>
-        /// 显示文章
+        /// 显示产品
         /// </summary>
         public void Enable()
         {
             this.IsVisible = EnumIsVisible.Can;
         }
+
         /// <summary>
-        /// 隐藏文章
+        /// 隐藏产品
         /// </summary>
         public void Disable()
         {

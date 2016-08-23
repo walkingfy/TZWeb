@@ -31,7 +31,13 @@ namespace TzWeb.Areas.Admin.Controllers
         public ActionResult LogOut()
         {
             CurrentUserHelper.ClearUserInfo();
-            return Redirect("Lgoin");
+            return Redirect("Login");
+        }
+        [Description("错误页")]
+        [ViewPage]
+        public ActionResult Error()
+        {
+            return View();
         }
         [Description("【主页】获取用户菜单")]
         [LoginAllowView]

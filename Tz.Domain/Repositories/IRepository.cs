@@ -49,7 +49,7 @@ namespace Tz.Domain.Repositories
         /// <returns>排序后的所有聚合根。</returns>
         IEnumerable<TAggregateRoot> GetAll(Expression<Func<TAggregateRoot, dynamic>> sortPredicate, SortOrder sortOrder);
 
-        // <summary>
+        /// <summary>
         /// 以指定的排序字段和排序方式，以及分页参数，从仓储中读取所有聚合根。
         /// </summary>
         /// <param name="sortPredicate">用于表述排序字段的Lambda表达式。</param>

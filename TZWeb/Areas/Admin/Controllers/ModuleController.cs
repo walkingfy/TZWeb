@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.EnterpriseServices;
+using System.ComponentModel;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -83,6 +83,7 @@ namespace TzWeb.Areas.Admin.Controllers
             return View();
         }
         [Description("获取所有控制器")]
+
         public JsonResult GetAllController()
         {
             IList<MVCControllerDataObject> allController;

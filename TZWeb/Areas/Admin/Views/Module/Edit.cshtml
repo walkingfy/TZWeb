@@ -110,7 +110,7 @@
         $("#Action").append("<option value=''>-请选择-</option>");
 
         $("#btnSelectIcon").click(function () {
-            xcore.showHtml({ url: "SelectIcon", title: "选择图标" }, function (dialog) {
+            xcore.showHtml({ url: "/Admin/Module/SelectIcon", title: "选择图标" }, function (dialog) {
                 $("a", dialog).click(function () {
                     $("#IconStyle").attr("class", $("i", $(this)).attr("class") + " bigger-130");
                     $("#Icon").val($("i", $(this)).attr("class"));
@@ -125,7 +125,7 @@
         $("#Controller").bind("change", function () {
             var controller = $(this).children('option:selected').val();
             $("#Action").children().remove();
-            xcore.ajax("GetAction", { controllName: controller }, function (result) {
+            xcore.ajax("/Admin/Module/GetAction", { controllName: controller }, function (result) {
                 $.each(result, function (key, value) {
                     $("#Action").append("<option value='" + value.ActionName + "'>" + value.ActionName + "(" + value.Description + ")</option>");
                 });
@@ -136,7 +136,7 @@
         $("#Action").bind("change", function () {
             var controller = $("#Controller").children('option:selected').val();
             var action = $("#Action").children('option:selected').val();
-            $("#LinkAddress").val(controller + "/" + action);
+            $("#LinkAddress").val("/Admin/" + controller + "/" + action);
         });
     });
 </script>

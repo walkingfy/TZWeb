@@ -64,7 +64,7 @@
             if (obj.id == 'Name') {
                 var name = $("#Name").val();
                 var Id = $("#Id").val();
-                $.post("CheckAccountIsExists", { Name: name, Id: Id }, function (data) {
+                $.post("/Admin/Account/CheckAccountIsExists", { Name: name, Id: Id }, function (data) {
                     params.err = !data.success;
                     params.msg = data.message;
                 });

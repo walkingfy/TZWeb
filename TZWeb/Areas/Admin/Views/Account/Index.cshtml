@@ -11,7 +11,7 @@
             </button>
             <button class="btn btn-warning" type="button" flag="delete">
                 <i class="ace-icon fa fa-trash-o bigger-120"></i>
-                删除
+                禁用
             </button>
             <button class="btn btn-success" type="button" flag="resetpwd">
                 <i class="ace-icon fa fa-rotate-left bigger-120"></i>
@@ -35,7 +35,7 @@
         var jqGrid = xcore.JqGrid({
             gridSelector: gridSelector,
             pagerSelector: pagerSelector,
-            url: "GetGridData",
+            url: "/Admin/Account/GetGridData",
             colNames: ['Id', '密码', '用户名', '邮箱', '联系方式', '真实姓名', '备注', '是否有效'],
             colModel: [
                 { name: 'Id', width: 1, hidden: true },
@@ -60,7 +60,13 @@
                     }
                 }
             ],
-            caption: "用户列表"
+            caption: "用户列表",
+            loadComplete : function(result){
+                xcore.showOperationMsg(result, "notify");
+            },
+            loadError : function(result) {
+                xcore.showOperationMsg(result, "notify");
+            }
         });
 
         function setSelect(dialog, callback) {
@@ -85,11 +91,12 @@
 
         $("#toolbar button").bind('click', function () {
             var btn = $(this).attr("flag");
+            var options = {};
             switch (btn) {
                 case "create":
                     xcore.showEditHtml({
-                        url: "Edit",
-                        saveurl: "Create",
+                        url: "/Admin/Account/Edit",
+                        saveurl: "/Admin/Account/Create",
                         width: 500,
                         height: 300,
                         titleIcon: "fa-plus",
@@ -105,8 +112,8 @@
                     var rowData = xcore.GetSelectJqGridRow(jqGrid);
                     if (rowData) {
                         xcore.showEditHtml({
-                            url: "Edit",
-                            saveurl: "Update",
+                            url: "/Admin/Account/Edit",
+                            saveurl: "/Admin/Account/Update",
                             width: 500,
                             height: 300,
                             titleIcon: "fa-edit",
@@ -117,7 +124,7 @@
                         }, function (dialog) {
                             xcore.setFields(rowData, dialog);
                             setSelect(dialog, function (ms) {
-                                xcore.ajax("GetAccountRole", { accountGuid: rowData.Id }, function (result) {
+                                xcore.ajax("/Admin/Account/GetAccountRole", { accountGuid: rowData.Id }, function (result) {
                                     ms.setValue(result);
                                 });
                             });
@@ -126,19 +133,24 @@
                     }
                     break;
                 case "delete":
-                    xcore.showDelete(jqGrid);
+                    options.url = "/Admin/Account/Disable";
+                    xcore.showDelete(jqGrid, options);
                     break;
                 case "realdelete":
-                    xcore.showRealDelete(jqGrid);
+                    options.url = "/Admin/Account/Derlete";
+                    xcore.showRealDelete(jqGrid, options);
                     break;
                 case "resetpwd":
                     var rowData = xcore.GetSelectJqGridRow(jqGrid);
-                    xcore.showConfirm("确定要重置密码吗？", function () {
-                        xcore.ajax("ResetPassword", rowData, function (result) {
-                            xcore.showOperationMsg(result, "notify");
-                            xcore.JqGridReLoad(jqGrid);
+                    if(rowData != null)
+                    {
+                        xcore.showConfirm("确定要重置密码吗？", function () {
+                            xcore.ajax("/Admin/Account/ResetPassword", rowData, function (result) {
+                                xcore.showOperationMsg(result, "notify");
+                                xcore.JqGridReLoad(jqGrid);
+                            });
                         });
-                    });
+                    }
                     break;
             }
         });

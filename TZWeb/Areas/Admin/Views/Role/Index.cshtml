@@ -11,7 +11,7 @@
             </button>
             <button class="btn btn-warning" type="button" flag="delete">
                 <i class="ace-icon fa fa-trash-o bigger-120"></i>
-                删除
+                禁用
             </button>
             <button class="btn btn-danger" type="button" flag="realdelete">
                 <i class="ace-icon fa fa-remove bigger-120"></i>
@@ -30,7 +30,7 @@
         var jqGrid = xcore.JqGrid({
             gridSelector: gridSelector,
             pagerSelector: pagerSelector,
-            url: "GetGridData",
+            url: "/Admin/Role/GetGridData",
             colNames: ['Id', '名称', '备注', '是否有效'],
             colModel: [
                 { name: 'Id', width: 1, hidden: true },
@@ -56,18 +56,33 @@
 
         $("#toolbar button").bind('click', function () {
             var btn = $(this).attr("flag");
+            var options = {};
             switch (btn) {
                 case "create":
-                    xcore.showAddPage(jqGrid);
+                    xcore.showEditHtml({
+                        url: "/Admin/Role/Edit",
+                        saveurl: "/Admin/Role/Create",
+                        width: 700,
+                        height: 600,
+                        titleIcon: "fa-plus",
+                        title: "新增",
+                        closeCallBack: function () {
+                            xcore.JqGridReLoad(jqGrid);
+                        }
+                    }, function (dialog) {
+
+                    });
                     break;
                 case "update":
                     xcore.showUpdatePage(jqGrid);
                     break;
                 case "delete":
-                    xcore.showDelete(jqGrid);
+                    options.url = "/Admin/Role/Update";
+                    xcore.showDelete(jqGrid, options);
                     break;
                 case "realdelete":
-                    xcore.showRealDelete(jqGrid);
+                    options.url = "/Admin/Role/Delete";
+                    xcore.showRealDelete(jqGrid, options);
                     break;
             }
         });

@@ -29,8 +29,8 @@ namespace TzWeb
                 "Default",
                 "{controller}/{action}/{id}",
                 new { controller = "Home", action = "Index", id = UrlParameter.Optional },
-                new string[] { "TzWeb.Controllers" }
-                );
+                new string[] { "TzWeb.Areas.Admin.Controllers" }
+                ).DataTokens.Add("Area","Admin");
         }
 
     }

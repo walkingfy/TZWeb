@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.EnterpriseServices;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Tz.Application;
 using Tz.DataObjects;
+using System.ComponentModel;
 
 namespace TzWeb.Areas.Admin.Controllers
 {
@@ -79,6 +79,17 @@ namespace TzWeb.Areas.Admin.Controllers
             }
             return this.Json(result);
         }
+        [Description("停用账户")]
+        public JsonResult Disable(AccountDataObject entity)
+        {
+            var result = base.GetModelValidate(entity);
+            if (result == null)
+            {
+                var service = new AccountAppService();
+                return this.Json(service.DisableAccount(entity));
+            }
+            return this.Json(result);
+        }
 
         [Description("删除用户")]
         public JsonResult Delete(AccountDataObject entity)
@@ -87,6 +98,7 @@ namespace TzWeb.Areas.Admin.Controllers
             return this.Json(service.DeleteAccount(entity));
         }
         [Description("检查账号是否存在")]
+        [LoginAllowView]
         public JsonResult CheckAccountIsExists(AccountDataObject entity)
         {
             var service = new AccountAppService();
@@ -101,6 +113,7 @@ namespace TzWeb.Areas.Admin.Controllers
             return this.Json(service.ResetPassword(entity));
         }
         [Description("获取账号角色")]
+        [LoginAllowView]
         public JsonResult GetAccountRole(Guid? accountGuid)
         {
             var service = new AccountAppService();

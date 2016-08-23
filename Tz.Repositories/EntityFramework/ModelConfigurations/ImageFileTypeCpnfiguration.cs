@@ -4,14 +4,13 @@ using Tz.Domain.Entity;
 
 namespace Tz.Repositories.EntityFramework.ModelConfigurations
 {
-    public class ArticleTypeConfiguration:EntityTypeConfiguration<Article>
+    public class ImageFileTypeCpnfiguration:EntityTypeConfiguration<ImageFile>
     {
-        public ArticleTypeConfiguration()
+        public ImageFileTypeCpnfiguration()
         {
             HasKey(t => t.Id);
             Property(t => t.Id).IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-            Property(t => t.Title).IsRequired().HasMaxLength(50);
-            ToTable("Articles");
+            ToTable("ImageFiles");
         }
     }
 }

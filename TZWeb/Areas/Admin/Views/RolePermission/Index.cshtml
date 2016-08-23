@@ -44,7 +44,7 @@
                     });
                     if (ids.length == 0) { xcore.showError("请选择角色对应模块"); return false; }
 
-                    xcore.ajax("SaveRolePermissions", { roleId: roleId, modules: ids }, function (result) {
+                    xcore.ajax("/Admin/RolePermission/SaveRolePermissions", { roleId: roleId, modules: ids }, function (result) {
                         if (!result) {
                             xcore.showError();//显示错误消息
                         } else
@@ -75,7 +75,7 @@
                 if (!zTree) { xcore.showError("没有模块数据，请联系管理员！"); return false; }
                 var select = selects.info[0];
                 if (select && select.id) {
-                    xcore.ajax("GetRolePermissionsById", { roleId: select.id }, function (res) {
+                    xcore.ajax("/Admin/RolePermission/GetRolePermissionsById", { roleId: select.id }, function (res) {
                         var nodes = zTree.getNodes();
                         $.each(res, function (key, value) {
                             $.each(nodes, function (nodei, node) {

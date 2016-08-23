@@ -158,7 +158,7 @@ namespace Tz.Domain.Services
             var result =
                 from rolePermission in
                     _rolePermissionRepository.FindAll(
-                        new ExpressionSpecification<RolePermission>(t => roleIds.Contains(t.Id)))
+                        new ExpressionSpecification<RolePermission>(t => roleIds.Contains(t.RoleId)))
                 join modules in
                     _moduleRepository.FindAll(new ExpressionSpecification<Module>(t => t.IsVisible == EnumIsVisible.Can
                                                                                        && t.Controller == controllName &&

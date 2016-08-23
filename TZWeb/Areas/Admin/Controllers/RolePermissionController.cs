@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.EnterpriseServices;
+using System.ComponentModel;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -18,6 +18,7 @@ namespace TzWeb.Areas.Admin.Controllers
             return View();
         }
         [Description("获取角色对应权限")]
+        [LoginAllowView]
         public JsonResult GetRolePermissionsById(Guid? roleId)
         {
             var service = new RolePermissionAppService();

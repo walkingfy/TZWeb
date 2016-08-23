@@ -112,6 +112,7 @@ namespace Tz.Application
                     repository.Remove(domainObject);
                 var rowCount = repository.Context.Commit();
                 entity = ObjectMapperManager.DefaultInstance.GetMapper<TDomainObject, TDataObject>().Map(domainObject);
+                
                 if (rowCount > 0)
                     return new OperationResult(OperationResultType.Success, "操作成功", entity);
                 else

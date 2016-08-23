@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.EnterpriseServices;
+using System.ComponentModel;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -28,6 +28,7 @@ namespace TzWeb.Areas.Admin.Controllers
             return this.Json(jqGrid);
         }
         [Description("获取下拉框数据")]
+        [LoginAllowView]
         public JsonResult GetSelectData()
         {
             var service = new RoleAppService();
@@ -35,6 +36,7 @@ namespace TzWeb.Areas.Admin.Controllers
             return this.Json(select, JsonRequestBehavior.AllowGet);
         }
         [Description("获取树数据")]
+        [LoginAllowView]
         public JsonResult GetTreeData()
         {
             var service = new RoleAppService();

@@ -33,7 +33,7 @@ namespace Tz.Application
             {
                 item.level = 0;
                 item.parent = null;
-                item.expanded = false;
+                item.expanded = true;
                 item.isLeaf = true;
                 item.loaded = true;
                 moduledtos.Remove(item);
@@ -47,7 +47,7 @@ namespace Tz.Application
                 {
                     //修改父级节点值
                     data.Remove(parent);
-                    parent.expanded = false;
+                    parent.expanded = !parent.ParentId.HasValue;
                     parent.isLeaf = false;
                     parent.loaded = true;
                     data.Add(parent);
